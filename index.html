@@ -1,5 +1,65 @@
+    <!-- Pop-Ups werden dynamisch erzeugt -->
+    <script>
+    const trigger = document.getElementById('nonsense-baum-trigger');
+    let activePopup = null;
+    let activeTimeout = null;
+
+    function createPopup(e) {
+        // Vorheriges Pop-Up entfernen
+        if (activePopup) {
+            activePopup.remove();
+            activePopup = null;
+            clearTimeout(activeTimeout);
+        }
+        // Neues Pop-Up erzeugen
+        const popup = document.createElement('div');
+        popup.className = 'nonsense-baum-popup';
+        popup.style.position = 'absolute';
+        popup.style.top = (e.clientY + 10) + 'px';
+        popup.style.left = (e.clientX - 150) + 'px';
+        popup.style.display = 'block';
+        popup.style.zIndex = 100;
+        popup.innerHTML = '<img src="img/nonsense-baum.jpg" alt="Nonsense Baum" />';
+        document.body.appendChild(popup);
+        activePopup = popup;
+
+        // Mouseenter auf Pop-Up hält es sichtbar
+        popup.addEventListener('mouseenter', () => {
+            clearTimeout(activeTimeout);
+        });
+        // Mouseleave auf Pop-Up startet Timer zum Entfernen
+        popup.addEventListener('mouseleave', () => {
+            activeTimeout = setTimeout(() => {
+                if (activePopup === popup) {
+                    popup.remove();
+                    activePopup = null;
+                }
+            }, 750);
+        });
+
+        // Timer zum Entfernen, falls nicht gehovt
+        activeTimeout = setTimeout(() => {
+            if (activePopup === popup) {
+                popup.remove();
+                activePopup = null;
+            }
+        }, 750);
+    }
+
+    trigger.addEventListener('mouseenter', createPopup);
+    trigger.addEventListener('mouseleave', () => {
+        if (activePopup) {
+            activeTimeout = setTimeout(() => {
+                if (activePopup) {
+                    activePopup.remove();
+                    activePopup = null;
+                }
+            }, 750);
+        }
+    });
+    </script>
 <!DOCTYPE html>
-<html lang="de">
+<<html lang="de">
 
 
 <head>
@@ -7,11 +67,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><WMC3-LEE></WMC3-LEE></title>
     <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" href="CSS/img-styles.css">
 </head>
 
 <body>
     <main>
-    <h1 class="fett">Nonsense</h1>
+    <h1 cla    ss="fett">Nonsense</h1>
     <p> ist eine meiner liebsten Literaturrichtungen. Deswegen widme ich diese Übungswebsite diesem Thema.</p>
     <a href="index.html">Home</a>
     <hr>
@@ -60,10 +121,13 @@
     <p style="margin-top: 30px;"> </p>
 
     <p> Nicht nur ist dieses Werk in altenglischer Sprache verfasst, sondern Lewis Caroll verwendete sogar eigene selbsterfundene Worte (Wortneuschöpfungen), um den Takt des Gedichtes zu vollenden.
-    <p> Nicht nur ist dieses Werk in altenglischer Sprache verfasst, sondern Lewis Caroll verwendete sogar eigene selbsterfundene Worte (Wortneuschöpfungen), um den Takt des Gedichtes zu vollenden.
     <span class="d-r-k">01.10.2025</span>
+    </p>
+
+    <p>Weitere Beispiele für Nonsense-Literatur sind etwa die Gedichte von Christian Morgenstern, wie "Die unmögliche Tatsache" oder "Das große Lalula". <br>
+    Auch moderne Werke und visuelle Experimente, wie&nbsp;&nbsp;&nbsp;<span class="nonsense-baum-highlight" id="nonsense-baum-trigger">einen Baum aus Wörtern</span>
+           &nbsp;&nbsp;&nbsp;, zeigen, wie vielfältig und kreativ Nonsense sein kann.
     </p>
     </main>
 
 </body>
-</html>

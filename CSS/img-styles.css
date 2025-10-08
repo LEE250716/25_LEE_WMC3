@@ -1,0 +1,62 @@
+/* Nonsense-Baum-Phrase und Pop-Up Styles */
+:root {
+    --baum-gruen: #216a1b;
+    --baum-braun: #795548;
+    --baum-hintergrund: linear-gradient(90deg, #a1887f 0%, #d7ccc8 25%, #c5e1a5 60%, #e8f5e9 100%);
+}
+
+.nonsense-baum-highlight {
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: underline wavy var(--baum-braun);
+    border-radius: 10px;
+    color: var(--baum-gruen);
+    background: var(--baum-hintergrund);
+    padding: 4px 10px;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+    cursor: pointer;
+    position: relative;
+    text-shadow: 1px 1px 2px #fff, 0 0 2px #388e3c;
+    margin: 0 2px;
+    display: inline-block;
+}
+.nonsense-baum-highlight::before {
+    content: '';
+    position: absolute;
+    left: -18px;
+    top: 50%;
+    width: 18px;
+    height: 4px;
+    background: var(--baum-braun);
+    border-radius: 2px 10px 2px 10px;
+    transform: rotate(-20deg);
+    z-index: 1;
+}
+.nonsense-baum-highlight::after {
+    content: '';
+    position: absolute;
+    right: -18px;
+    top: 40%;
+    width: 18px;
+    height: 4px;
+    background: var(--baum-gruen);
+    border-radius: 10px 2px 10px 2px;
+    transform: rotate(15deg);
+    z-index: 1;
+}
+/* img-styles.css: Styles für Bild-Popups und Bild-Darstellung */
+
+.nonsense-baum-popup img {
+    max-width: 300px;
+    border: 2px solid var(--baum-braun, #795548);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    background: #fff;
+    border-radius: 10px;
+    display: block;
+}
+
+.nonsense-baum-popup {
+    position: absolute;
+    z-index: 100;
+    display: none;
+}
