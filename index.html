@@ -11,21 +11,55 @@
 </head>
 
 <body>
+    
+<script>
+(function(){
+  const trigger = document.getElementById('nonsense-baum-trigger');
+  const popup = document.getElementById('baum-popup');
+  let hideTimer = null;
+  if (!trigger || !popup) return;
+
+  function showPopup(){
+    if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+    popup.classList.add('visible');
+    popup.setAttribute('aria-hidden','false');
+  }
+
+  function hidePopupDelayed(){
+    if (hideTimer) clearTimeout(hideTimer);
+    hideTimer = setTimeout(()=>{
+      popup.classList.remove('visible');
+      popup.setAttribute('aria-hidden','true');
+      hideTimer = null;
+    }, 2000); // bleibt 2 Sekunden sichtbar
+  }
+
+  trigger.addEventListener('mouseenter', showPopup);
+  trigger.addEventListener('mouseleave', hidePopupDelayed);
+  trigger.addEventListener('focus', showPopup);
+  trigger.addEventListener('blur', hidePopupDelayed);
+
+  popup.addEventListener('mouseenter', ()=> { if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; } });
+  popup.addEventListener('mouseleave', hidePopupDelayed);
+})();
+</script>
+
     <h1 class="fett">Nonsense</h1>
     <p> ist eine meiner liebsten Literaturrichtungen. Deswegen widme ich diese Übungswebsite diesem Thema.</p>
     <a href="index.html">Home</a>
     <p style="margin-top: 60px;"> </p>
     <main>
     <h2 class="unterstrichen">Was ist Nonsense?</h2>
-    <p>Nonsense ist eine Form der Literatur, die <span class="fett">absurde</span>, <span class="kursiv">unsinnige</span> oder <span class="unterstrichen">widersprüchliche</span> Elemente verwendet, um Humor zu erzeugen oder zum Nachdenken anzuregen. Es spielt oft mit Sprache, Logik und Erwartungen, um überraschende und unterhaltsame Effekte zu erzielen.</p>
-    <p>Ein bekanntes Beispiel für Nonsense-Literatur sind die Werke von Lewis Carroll, insbesondere "Alice im Wunderland" und "Durch den Spiegel und was Alice dort fand". Diese Geschichten enthalten viele absurde Situationen und Charaktere, die die Grenzen der Logik herausfordern.</p>
-    <p>Nonsense kann auch in Gedichten vorkommen, wie in den Werken von Edward Lear, der für seine humorvollen und oft unsinnigen Gedichte bekannt ist. Ein berühmtes Beispiel ist "The Owl and the Pussycat".</p>
-    <p>Insgesamt ist Nonsense eine kreative und spielerische Art der Literatur, die dazu einlädt, die Welt aus einer anderen Perspektive zu betrachten und die Freude an der Sprache zu entdecken.</p>
+    <p>Nonsense ist eine Form der Literatur, die <span class="fett">absurde</span>, <span class="kursiv">unsinnige</span> oder <span class="unterstrichen">widersprüchliche</span> Elemente verwendet, um Humor zu erzeugen oder zum Nachdenken anzuregen. Es spielt oft mit Sprache, Logik und Erwartungen, um überraschende und unterhaltsame Effekte zu erzielen.<br>
+    Ein bekanntes Beispiel für Nonsense-Literatur sind die Werke von Lewis Carroll, insbesondere "Alice im Wunderland" und "Durch den Spiegel und was Alice dort fand". Diese Geschichten enthalten viele absurde Situationen und Charaktere, die die Grenzen der Logik herausfordern.<br>
+    Nonsense kann auch in Gedichten vorkommen, wie in den Werken von Edward Lear, der für seine humorvollen und oft unsinnigen Gedichte bekannt ist. Ein berühmtes Beispiel ist "The Owl and the Pussycat".<br>
+    Insgesamt ist Nonsense eine kreative und spielerische Art der Literatur, die dazu einlädt, die Welt aus einer anderen Perspektive zu betrachten und die Freude an der Sprache zu entdecken.</p>
     <p class="kursiv kleiner">Als kleine Bemerkung hier am Rande: Visual Studio Code ist definitiv ein sehr cooles Programm, da es die Informationen hierüber selbstständig erstellt hat (ich hätte gerne Lewis Carroll selbst erwähnt).</p>
     <p style="margin-top: 60px;"> </p>
 
     <p>Hier ein wunderbares Beispiel für eben eines dieser Werke, worin ich so großen Gefallen finde:</p>
-    <div class="zentriert">
+    <section class="zentriert-img" style="--zent-img: url('../img/jabber.jpg')">
+    <div class="zentriert-img-content zentriert">
         <h3 style="display:inline; font-weight:bold;">Jabberwocky</h3><br>
         'Twas brillig, and the slithy toves<br>
         Did gyre and gimble in the wabe;<br>
@@ -56,6 +90,7 @@
         All mimsy were the borogoves,<br>
         And the mome raths outgrabe.<br>
     </div>
+    </section>
     <p style="margin-top: 30px;"> </p>
 
     <p> Nicht nur ist dieses Werk in altenglischer Sprache verfasst, sondern Lewis Caroll verwendete sogar eigene selbsterfundene Worte (Wortneuschöpfungen), um den Takt des Gedichtes zu vollenden.
@@ -64,9 +99,17 @@
 
 
     <p>Weitere Beispiele für Nonsense-Literatur sind etwa die Gedichte von Christian Morgenstern, wie "Die unmögliche Tatsache" oder "Das große Lalula". <br>
-    Auch moderne Werke und visuelle Experimente, wie&nbsp;&nbsp;&nbsp;<span class="nonsense-baum-highlight" id="nonsense-baum-trigger">einen Baum aus Wörtern</span>
-    &nbsp;&nbsp;&nbsp;, zeigen, wie vielfältig und kreativ Nonsense sein kann.</p>
+    Auch moderne Werke und visuelle Experimente, wie 
+    <span class="popup-wrap">
+        <span class="nonsense-baum-highlight" id="nonsense-baum-trigger" tabindex="0" aria-describedby="baum-popup">
+        ein Baum aus Wörtern, </span>
+        <span class="nonsense-baum-popup" id="baum-popup" role="img" aria-hidden="true">
+            <img src="img/nonsense-baum.jpg" alt="Baum aus Wörtern">
+        </span>
+    </span> 
+    zeigen, wie vielfältig und kreativ Nonsense sein kann.</p>
     <span class="d-r-k">09.10.2025</span>
+    <span class="d-r-k">20.11.2025</span>
     </main>
 
 </body>
