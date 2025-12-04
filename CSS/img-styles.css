@@ -1,83 +1,90 @@
 /* Popup-Styles für img/nonsense-baum.jpg */
 
-.popup-wrap { position: relative; display: inline-block; }
+.popup-wrap {
+    position: relative;
+    display: inline-block;
 
-.popup-wrap:hover .nonsense-baum-popup,
-.popup-wrap:focus-within .nonsense-baum-popup {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
-  pointer-events: auto;
+    &:hover .nonsense-baum-popup,
+    &:focus-within .nonsense-baum-popup {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+        pointer-events: auto;
+    }
 }
 
 .nonsense-baum-popup {
-  position: absolute;
-  bottom: calc(100% + 10px);
-  left: 50%;
-  transform: translateX(-50%) translateY(6px);
-  z-index: 999;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 180ms ease, transform 180ms ease;
-}
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 180ms ease, transform 180ms ease;
 
-.nonsense-baum-popup.visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
-  pointer-events: auto;
-}
+    &.visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+        pointer-events: auto;
+    }
 
-.nonsense-baum-popup img {
-  display: block;
-  width: 300px;
-  max-width: 40vw;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-  background: #fff;
+    img {
+        display: block;
+        width: 300px;
+        max-width: 40vw;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+        background: #fff;
+    }
 }
 
 /* Fallback: bei Tastatur-Fokus sichtbar */
 .popup-wrap:focus-within .nonsense-baum-popup {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
-  pointer-events: auto;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
 }
 
 .nonsense-baum-highlight {
-  color: #298b0b;                     /* auffällige Farbe */
-  font-weight: 600;                   /* etwas fetter */
-  text-decoration: underline dotted rgba(11,99,255,0.35);
-  text-decoration-thickness: 1px;
-  cursor: pointer;                    /* Maus zeigt Interaktion an */
-  transition: color 140ms ease, transform 120ms ease, background-color 120ms ease;
-  border-radius: 4px;
-  padding: 0 2px;
-  line-height: 1;                     /* verhindert Layout-Verschiebung */
+    color: #298b0b;
+    /* auffällige Farbe */
+    font-weight: 600;
+    /* etwas fetter */
+    text-decoration: underline dotted rgba(11, 99, 255, 0.35);
+    text-decoration-thickness: 1px;
+    cursor: pointer;
+    /* Maus zeigt Interaktion an */
+    transition: color 140ms ease, transform 120ms ease, background-color 120ms ease;
+    border-radius: 4px;
+    padding: 0 2px;
+    line-height: 1;
+    /* verhindert Layout-Verschiebung */
 }
 
 /* Hover / Fokus deutlich machen */
 .popup-wrap:hover .nonsense-baum-highlight,
 .nonsense-baum-highlight:focus,
 .popup-wrap:focus-within .nonsense-baum-highlight {
-  color: #d3ebf8;
-  background-color: rgba(11,99,255,0.06);
-  transform: translateY(-1px);
+    color: #d3ebf8;
+    background-color: rgba(11, 99, 255, 0.06);
+    transform: translateY(-1px);
 }
 
 .popup-wrap:hover .nonsense-baum-highlight::after,
 .nonsense-baum-highlight:focus::after {
-  opacity: 1;
-  transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* sichtbarer Fokus-Ring für Tastaturnutzer */
 .nonsense-baum-highlight:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(11,99,255,0.12);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(11, 99, 255, 0.12);
 }
 
 /* Seitenbilder um Zentrum */
@@ -86,6 +93,7 @@
     margin: 2rem 0;
     overflow: visible;
 }
+
 .zentriert-img::before,
 .zentriert-img::after {
     content: "";
@@ -101,8 +109,16 @@
     pointer-events: none;
     z-index: 0;
 }
-.zentriert-img::before {left:0; background-position: left center;}
-.zentriert-img::after {right:0; background-position: right center;}
+
+.zentriert-img::before {
+    left: 0;
+    background-position: left center;
+}
+
+.zentriert-img::after {
+    right: 0;
+    background-position: right center;
+}
 
 .zentriert-img-content {
     position: relative;
@@ -110,12 +126,19 @@
     max-width: 720px;
     margin: 0 auto;
     padding: 2rem 2.5rem;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
     border-radius: 8px;
 }
 
 @media (max-width: 900px) {
+
     .zentriert-img::before,
-    .zentriert-img::after {display:none;}
-    .zentriert-img-content {padding: 1.25rem; max-width: 80%;}
+    .zentriert-img::after {
+        display: none;
+    }
+
+    .zentriert-img-content {
+        padding: 1.25rem;
+        max-width: 80%;
+    }
 }
