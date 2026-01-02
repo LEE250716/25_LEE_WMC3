@@ -65,49 +65,49 @@
 
     <fieldset>
       <legend>1) Hat Ihnen diese Website gefallen?</legend>
-      <label><input type="checkbox" name="q1" value="design"> Ja.</label>
-      <label><input type="checkbox" name="q1" value="lesbarkeit"> Ja.</label>
-      <label><input type="checkbox" name="q1" value="navigation"> Ja.</label>
-      <label><input type="checkbox" name="q1" value="navigation"> Ahhhhhh!</label>
+      <label><input type="checkbox" name="q1" value="j"> Ja.</label>
+      <label><input type="checkbox" name="q1" value="j"> Ja.</label>
+      <label><input type="checkbox" name="q1" value="j"> Ja.</label>
+      <label><input type="checkbox" name="no" value="n"> Ahhhhhh!</label>
     </fieldset>
 
     <fieldset>
       <legend>2) Haben Sie auf der Startseite unten auf "ein Baum aus Wörtern" geklickt?</legend>
-      <label><input type="checkbox" name="q2" value="vorhang"> Ja.</label>
-      <label><input type="checkbox" name="q2" value="farben"> Nein.</label>
-      <label><input type="checkbox" name="q2" value="interaktion"> Welche Startseite?</label>
+      <label><input type="checkbox" name="q2" value="j"> Ja.</label>
+      <label><input type="checkbox" name="q2" value="j"> Nein.</label>
+      <label><input type="checkbox" name="no" value="n"> Welche Startseite?</label>
     </fieldset>
 
     <fieldset>
       <legend>3) Hätten Sie gerne noch zusätzlich Animationen oder Funktionen gesehen?</legend>
-      <label><input type="checkbox" name="q3" value="layout"> Nein, alles ist perfekt.</label>
-      <label><input type="checkbox" name="q3" value="content"> Ein paar mehr Funktionen.</label>
-      <label><input type="checkbox" name="q3" value="humor"> Ein paar Animationen.</label>
+      <label><input type="checkbox" name="q3" value="j"> Nein, alles ist perfekt.</label>
+      <label><input type="checkbox" name="no" value="n"> Ein paar mehr Funktionen.</label>
+      <label><input type="checkbox" name="no" value="n"> Ein paar Animationen.</label>
     </fieldset>
 
     <fieldset>
       <legend>4) Hatten Sie Spaß beim Erkunden dieser Seiten?</legend>
-      <label><input type="checkbox" name="q4" value="zugang"> Nein, ich hasse alles daran.</label>
-      <label><input type="checkbox" name="q4" value="mobile"> Ja, ich liebe es.</label>
-      <label><input type="checkbox" name="q4" value="kontrast"> Ja, aber manches war mühsam.</label>
+      <label><input type="checkbox" name="no" value="n"> Nein, ich hasse alles daran.</label>
+      <label><input type="checkbox" name="q4" value="j"> Ja, ich liebe es.</label>
+      <label><input type="checkbox" name="q4" value="j"> Ja, aber manches war mühsam.</label>
     </fieldset>
 
     <fieldset>
       <legend>5) Würden Sie erneut eine meiner Seiten besuchen?</legend>
-      <label><input type="checkbox" name="q5" value="zugang"> Nein. Ich bin nicht masochistisch.</label>
-      <label><input type="checkbox" name="q5" value="mobile"> Ja, ich bin masochistisch.</label>
-      <label><input type="checkbox" name="q5" value="kontrast"> Ja, ich bin gespannt wie Sie sich entwickeln.</label>
+      <label><input type="checkbox" name="no" value="n"> Nein. Ich bin nicht masochistisch.</label>
+      <label><input type="checkbox" name="q5" value="j"> Ja, ich bin masochistisch.</label>
+      <label><input type="checkbox" name="q5" value="j"> Ja, ich bin gespannt wie Sie sich entwickeln.</label>
     </fieldset>
     
     <fieldset>
       <legend>6) Zu welcher Note würden Sie tendieren?</legend>
-      <label><input type="checkbox" name="q6" value="zugang"> 1</label>
-      <label><input type="checkbox" name="q6" value="zugang"> 1</label>
-      <label><input type="checkbox" name="q6" value="zugang"> 1</label>
-      <label><input type="checkbox" name="q6" value="zugang"> 2</label>
-      <label><input type="checkbox" name="q6" value="zugang"> 3</label>
-      <label><input type="checkbox" name="q6" value="zugang"> 4</label>
-      <label><input type="checkbox" name="q6" value="zugang"> doch 1</label>
+      <label><input type="checkbox" name="q6" value="j"> 1</label>
+      <label><input type="checkbox" name="q6" value="j"> 1</label>
+      <label><input type="checkbox" name="q6" value="j"> 1</label>
+      <label><input type="checkbox" name="q6" value="j"> 2</label>
+      <label><input type="checkbox" name="no" value="n"> 3</label>
+      <label><input type="checkbox" name="no" value="n"> 4</label>
+      <label><input type="checkbox" name="q6" value="j"> doch 1</label>
     </fieldset>
 
     <div class="survey-actions">
@@ -117,6 +117,7 @@
   </form>
 
   <div id="survey-results-v2" class="survey-results" aria-live="polite" hidden></div>
+</section>
 
   <script>
   (function(){
@@ -130,14 +131,13 @@
       const q2 = data.getAll('q2').length;
       const q3 = data.getAll('q3').length;
       const q4 = data.getAll('q4').length;
-      const score = q1 + q2 + q3 + q4; // 0..12
+      const q5 = data.getAll('q5').length;
+      const q6 = data.getAll('q6').length;
+      const score = q1 + q2 + q3 + q4 + q5 + q6;
 
       let verdict = '';
-      if (score >= 23) verdict = 'Heute wird das Vorpalschwert geschärft!';
-      else if (score >= 15) verdict = 'Das Vorpalschwert ist bereits beschäftigt...';
-      else if (score >= 9) verdict = 'Dem Vorpalschwert gefällt dein Feedback!';
-      else if (score < 6) verdict = 'Das Vorpalschwert wird dich finden...';
-      else verdict = 'Heute ruht das Vorpalschwert.';
+      if (score >= 6) verdict = 'Heute ruht das Vorpalschwert.';
+      else verdict = 'Das Vorpalschwert wird dich finden...';
 
       results.hidden = false;
       results.innerHTML = '<p><strong>Ergebnis:</strong> ' + verdict + '</p>' +
