@@ -1,12 +1,293 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.5">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Matroshka</title>
     <link rel="stylesheet" href="CSS/styles.css">
     <link rel="stylesheet" href="CSS/img-styles.css">
 </head>
+
+<body style="z-index: 0;">
+
+<!-- Curtain (Vorhang) panels: 20 stacked layers that can be slid outward -->
+<div class="curtain" id="curtain" aria-hidden="false">
+  <!-- layers 1..20 (front-most first) -->
+  <div class="layer" data-index="1">
+    <div class="panel left" aria-hidden="true"><div class="handle left" data-index="1">◀</div></div>
+    <div class="panel right" aria-hidden="true"><div class="handle right" data-index="1">▶</div></div>
+  </div>
+  <div class="layer" data-index="2">
+    <div class="panel left" aria-hidden="true"><div class="handle left" data-index="2">◀</div></div>
+    <div class="panel right" aria-hidden="true"><div class="handle right" data-index="2">▶</div></div>
+  </div>
+  <div class="layer" data-index="3">
+    <div class="panel left" aria-hidden="true"><div class="handle left" data-index="3">◀</div></div>
+    <div class="panel right" aria-hidden="true"><div class="handle right" data-index="3">▶</div></div>
+  </div>
+  <div class="layer" data-index="4">
+    <div class="panel left" aria-hidden="true"><div class="handle left" data-index="4">◀</div></div>
+    <div class="panel right" aria-hidden="true"><div class="handle right" data-index="4">▶</div></div>
+  </div>
+  <div class="layer" data-index="5">
+    <div class="panel left" aria-hidden="true"><div class="handle left" data-index="5">◀</div></div>
+    <div class="panel right" aria-hidden="true"><div class="handle right" data-index="5">▶</div></div>
+  </div>
+  <div class="layer" data-index="6">
+    <div class="panel left" aria-hidden="true"><div class="handle left" data-index="6">◀</div></div>
+    <div class="panel right" aria-hidden="true"><div class="handle right" data-index="6">▶</div></div>
+  </div>
+  <div class="layer" data-index="7">
+    <div class="panel left" aria-hidden="true"><div class="handle left" data-index="7">◀</div></div>
+    <div class="panel right" aria-hidden="true"><div class="handle right" data-index="7">▶</div></div>
+  </div>
+  <div class="layer" data-index="8">
+    <div class="panel left" aria-hidden="true"><div class="handle left" data-index="8">◀</div></div>
+    <div class="panel right" aria-hidden="true"><div class="handle right" data-index="8">▶</div></div>
+  </div>
+  <div class="layer" data-index="9">
+    <div class="panel left" aria-hidden="true"><div class="handle left" data-index="9">◀</div></div>
+    <div class="panel right" aria-hidden="true"><div class="handle right" data-index="9">▶</div></div>
+  </div>
+  <div class="layer" data-index="10">
+    <div class="panel left" aria-hidden="true"><div class="handle left" data-index="10">◀</div></div>
+    <div class="panel right" aria-hidden="true"><div class="handle right" data-index="10">▶</div></div>
+  </div>
+  <div class="layer" data-index="11">
+    <div class="panel left" aria-hidden="true"><div class="handle left" data-index="11">◀</div></div>
+    <div class="panel right" aria-hidden="true"><div class="handle right" data-index="11">▶</div></div>
+  </div>
+  <div class="layer" data-index="12">
+    <div class="panel left" aria-hidden="true"><div class="handle left" data-index="12">◀</div></div>
+    <div class="panel right" aria-hidden="true"><div class="handle right" data-index="12">▶</div></div>
+  </div>
+  <div class="layer" data-index="13">
+    <div class="panel left" aria-hidden="true"><div class="handle left" data-index="13">◀</div></div>
+    <div class="panel right" aria-hidden="true"><div class="handle right" data-index="13">▶</div></div>
+  </div>
+  <div class="layer" data-index="14">
+    <div class="panel left" aria-hidden="true"><div class="handle left" data-index="14">◀</div></div>
+    <div class="panel right" aria-hidden="true"><div class="handle right" data-index="14">▶</div></div>
+  </div>
+  <div class="layer" data-index="15">
+    <div class="panel left" aria-hidden="true"><div class="handle left" data-index="15">◀</div></div>
+    <div class="panel right" aria-hidden="true"><div class="handle right" data-index="15">▶</div></div>
+  </div>
+  <div class="layer" data-index="16">
+    <div class="panel left" aria-hidden="true"><div class="handle left" data-index="16">◀</div></div>
+    <div class="panel right" aria-hidden="true"><div class="handle right" data-index="16">▶</div></div>
+  </div>
+  <div class="layer" data-index="17">
+    <div class="panel left" aria-hidden="true"><div class="handle left" data-index="17">◀</div></div>
+    <div class="panel right" aria-hidden="true"><div class="handle right" data-index="17">▶</div></div>
+  </div>
+  <div class="layer" data-index="18">
+    <div class="panel left" aria-hidden="true"><div class="handle left" data-index="18">◀</div></div>
+    <div class="panel right" aria-hidden="true"><div class="handle right" data-index="18">▶</div></div>
+  </div>
+  <div class="layer" data-index="19">
+    <div class="panel left" aria-hidden="true"><div class="handle left" data-index="19">◀</div></div>
+    <div class="panel right" aria-hidden="true"><div class="handle right" data-index="19">▶</div></div>
+  </div>
+  <div class="layer" data-index="20">
+    <div class="panel left" aria-hidden="true"><div class="handle left" data-index="20">◀</div></div>
+    <div class="panel right" aria-hidden="true"><div class="handle right" data-index="20">▶</div></div>
+  </div>
+</div>
+
+<div class="curtain-controls" aria-hidden="false">
+  <button id="curtain-open-next">Öffne nächstes</button>
+  <button id="curtain-open-all">Öffne alle nacheinander</button>
+  <button id="curtain-reset">Zurücksetzen</button>
+  <details class="curtain-color-controls" aria-label="Vorhang Farben">
+    <summary>Layer-Farben</summary>
+    <div class="layer-controls">
+      <label>Schicht 1: <input type="color" data-layer="1" value="#ffdddd"><input type="range" min="0" max="100" value="35" data-layer-opacity="1" aria-label="Transparenz Schicht 1"></label>
+      <label>Schicht 2: <input type="color" data-layer="2" value="#ffdedd"><input type="range" min="0" max="100" value="34" data-layer-opacity="2" aria-label="Transparenz Schicht 2"></label>
+      <label>Schicht 3: <input type="color" data-layer="3" value="#fff0dd"><input type="range" min="0" max="100" value="33" data-layer-opacity="3" aria-label="Transparenz Schicht 3"></label>
+      <label>Schicht 4: <input type="color" data-layer="4" value="#f0ffdd"><input type="range" min="0" max="100" value="32" data-layer-opacity="4" aria-label="Transparenz Schicht 4"></label>
+      <label>Schicht 5: <input type="color" data-layer="5" value="#ddfff0"><input type="range" min="0" max="100" value="31" data-layer-opacity="5" aria-label="Transparenz Schicht 5"></label>
+      <label>Schicht 6: <input type="color" data-layer="6" value="#ddeeff"><input type="range" min="0" max="100" value="30" data-layer-opacity="6" aria-label="Transparenz Schicht 6"></label>
+      <label>Schicht 7: <input type="color" data-layer="7" value="#efe0ff"><input type="range" min="0" max="100" value="29" data-layer-opacity="7" aria-label="Transparenz Schicht 7"></label>
+      <label>Schicht 8: <input type="color" data-layer="8" value="#ffdede"><input type="range" min="0" max="100" value="28" data-layer-opacity="8" aria-label="Transparenz Schicht 8"></label>
+      <label>Schicht 9: <input type="color" data-layer="9" value="#ffeedd"><input type="range" min="0" max="100" value="27" data-layer-opacity="9" aria-label="Transparenz Schicht 9"></label>
+      <label>Schicht 10: <input type="color" data-layer="10" value="#ffffdd"><input type="range" min="0" max="100" value="26" data-layer-opacity="10" aria-label="Transparenz Schicht 10"></label>
+      <label>Schicht 11: <input type="color" data-layer="11" value="#edffdd"><input type="range" min="0" max="100" value="25" data-layer-opacity="11" aria-label="Transparenz Schicht 11"></label>
+      <label>Schicht 12: <input type="color" data-layer="12" value="#ddfff7"><input type="range" min="0" max="100" value="24" data-layer-opacity="12" aria-label="Transparenz Schicht 12"></label>
+      <label>Schicht 13: <input type="color" data-layer="13" value="#e0ffff"><input type="range" min="0" max="100" value="23" data-layer-opacity="13" aria-label="Transparenz Schicht 13"></label>
+      <label>Schicht 14: <input type="color" data-layer="14" value="#eeddff"><input type="range" min="0" max="100" value="22" data-layer-opacity="14" aria-label="Transparenz Schicht 14"></label>
+      <label>Schicht 15: <input type="color" data-layer="15" value="#ffe0f0"><input type="range" min="0" max="100" value="21" data-layer-opacity="15" aria-label="Transparenz Schicht 15"></label>
+      <label>Schicht 16: <input type="color" data-layer="16" value="#ffdfe5"><input type="range" min="0" max="100" value="20" data-layer-opacity="16" aria-label="Transparenz Schicht 16"></label>
+      <label>Schicht 17: <input type="color" data-layer="17" value="#f2e6ff"><input type="range" min="0" max="100" value="19" data-layer-opacity="17" aria-label="Transparenz Schicht 17"></label>
+      <label>Schicht 18: <input type="color" data-layer="18" value="#e6ffe6"><input type="range" min="0" max="100" value="18" data-layer-opacity="18" aria-label="Transparenz Schicht 18"></label>
+      <label>Schicht 19: <input type="color" data-layer="19" value="#fffbe6"><input type="range" min="0" max="100" value="17" data-layer-opacity="19" aria-label="Transparenz Schicht 19"></label>
+      <label>Schicht 20: <input type="color" data-layer="20" value="#fbeffb"><input type="range" min="0" max="100" value="16" data-layer-opacity="20" aria-label="Transparenz Schicht 20"></label>
+    </div>
+    <div style="margin-top:0.5rem"><button id="curtain-randomize">Zufällige Farben</button> <button id="curtain-reset-colors">Reset Farben</button></div>
+  </details>
+</div>
+
+<nav class="main-nav fett" aria-label="Hauptnavigation">
+  <button class="nav-toggle" aria-controls="nav-list" aria-expanded="false" aria-label="Navigation ein-/ausklappen">☰<span class="sr-only">Navigation ein-/ausklappen</span></button>
+  <ul id="nav-list" class="nav-list">
+    <p> </p>
+    <li><a href="index.html">Start</a></li>
+    <li><a href="jabber.html">Jabberwocky</a></li>
+    <li><a href="baum.html">Baum aus Wörtern</a></li>
+    <li><a href="matroshka.html">Matroshka</a></li>
+    <li><a href="feedback.html">What's this?</a></li>
+  </ul>
+</nav>
+
+
+<script>
+(function(){
+  const nav = document.querySelector('.main-nav');
+  const btn = nav && nav.querySelector('.nav-toggle');
+  const list = nav && nav.querySelector('#nav-list');
+  if (!btn || !list) return;
+  btn.addEventListener('click', function(){
+    const expanded = this.getAttribute('aria-expanded') === 'true';
+    this.setAttribute('aria-expanded', String(!expanded));
+    nav.classList.toggle('nav-open', !expanded);
+  });
+  // Close menu on outside click or Escape
+  document.addEventListener('click', function(e){
+    if (!nav.contains(e.target) && nav.classList.contains('nav-open')) {
+      btn.setAttribute('aria-expanded','false');
+      nav.classList.remove('nav-open');
+    }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && nav.classList.contains('nav-open')) {
+      btn.setAttribute('aria-expanded','false');
+      nav.classList.remove('nav-open');
+      btn.focus();
+    }
+  });
+})();
+</script>
+
+<script>
+(function(){
+  const curtain = document.getElementById('curtain');
+  const layers = curtain ? Array.from(curtain.querySelectorAll('.layer')) : [];
+  const btnNext = document.getElementById('curtain-open-next');
+  const btnAll = document.getElementById('curtain-open-all');
+  const btnReset = document.getElementById('curtain-reset');
+  if (!curtain || !btnNext || !btnAll || !btnReset) return;
+
+  function setPercent(i, p){
+    p = Math.max(0, Math.min(100, Math.round(p)));
+    const layer = layers[i];
+    if (!layer) return;
+    layer.style.setProperty('--open-percent', p + '%');
+    layer.classList.toggle('open', p >= 100);
+  }
+  function getPercent(i){
+    const layer = layers[i];
+    if (!layer) return 0;
+    const val = getComputedStyle(layer).getPropertyValue('--open-percent');
+    return parseInt(val) || 0;
+  }
+
+  btnNext.addEventListener('click', ()=>{
+    const next = layers.findIndex((_,i)=> getPercent(i) === 0);
+    if (next !== -1) setPercent(next, 100);
+  });
+
+  btnAll.addEventListener('click', ()=>{
+    layers.forEach((_,i)=> setTimeout(()=> setPercent(i, 100), i * 300));
+  });
+
+  btnReset.addEventListener('click', ()=> layers.forEach((_,i)=> setPercent(i, 0)));
+
+  // per-layer handles: click toggles, pointer drag adjusts openness
+  layers.forEach((layer, i)=>{
+    const handles = layer.querySelectorAll('.handle');
+    handles.forEach(h=>{
+      h.addEventListener('click', ()=> setPercent(i, getPercent(i) === 0 ? 100 : 0));
+      function startDrag(e){
+        e.preventDefault();
+        function move(ev){
+          const clientX = ev.touches ? ev.touches[0].clientX : ev.clientX;
+          const centerX = window.innerWidth / 2;
+          const percent = Math.min(100, Math.round(Math.abs(clientX - centerX) / (window.innerWidth/2) * 100));
+          setPercent(i, percent);
+        }
+        function end(){
+          document.removeEventListener('mousemove', move);
+          document.removeEventListener('touchmove', move);
+          document.removeEventListener('mouseup', end);
+          document.removeEventListener('touchend', end);
+        }
+        document.addEventListener('mousemove', move);
+        document.addEventListener('touchmove', move);
+        document.addEventListener('mouseup', end);
+        document.addEventListener('touchend', end);
+      }
+      h.addEventListener('pointerdown', startDrag);
+    });
+  });
+})();
+</script>
+
+<script>
+(function(){
+  function hexToRgb(hex){
+    hex = hex.replace('#','');
+    if (hex.length === 3) hex = hex.split('').map(h=>h+h).join('');
+    const num = parseInt(hex,16);
+    return [num>>16 & 255, num>>8 & 255, num & 255];
+  }
+  const curtain = document.getElementById('curtain');
+  if (!curtain) return;
+  const layers = Array.from(curtain.querySelectorAll('.layer'));
+
+  function applyColor(layerIndex, hex, alpha){
+    const rgba = hex ? ('rgba('+hexToRgb(hex).join(',')+','+alpha+')') : 'rgba(0,0,0,0)';
+    const layer = layers[layerIndex];
+    if (!layer) return;
+    layer.style.setProperty('--tint', rgba);
+  }
+
+  // wire color inputs
+  document.querySelectorAll('.curtain-color-controls input[type="color"]').forEach(input=>{
+    const idx = Number(input.getAttribute('data-layer')) - 1;
+    const op = document.querySelector('[data-layer-opacity="'+(idx+1)+'"]');
+    const apply = ()=> applyColor(idx, input.value, (op ? Number(op.value)/100 : 0.35));
+    input.addEventListener('input', apply);
+    if (op) { op.addEventListener('input', apply); }
+    // initialize
+    apply();
+  });
+
+  document.getElementById('curtain-randomize').addEventListener('click', ()=>{
+    document.querySelectorAll('.curtain-color-controls input[type="color"]').forEach((input)=>{
+      const rand = '#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
+      input.value = rand;
+      input.dispatchEvent(new Event('input'));
+    });
+  });
+
+  document.getElementById('curtain-reset-colors').addEventListener('click', ()=>{
+    const defaults = ['#ffdddd','#ffdedd','#fff0dd','#f0ffdd','#ddfff0','#ddeeff','#efe0ff','#ffdede','#ffeedd','#ffffdd','#edffdd','#ddfff7','#e0ffff','#eeddff','#ffe0f0','#ffdfe5','#f2e6ff','#e6ffe6','#fffbe6','#fbeffb'];
+    document.querySelectorAll('.curtain-color-controls input[type="color"]').forEach((input,i)=>{
+      input.value = defaults[i] || '#ffffff';
+      input.dispatchEvent(new Event('input'));
+    });
+  });
+})();
+</script>
+
+    <div class="center-text" aria-hidden="false">
+        <h2>Willkommen zum Ende dieser Matroshka Darstellung!</h2>
+        <p> Wenn man das Prinzip der russischen Matroshka-Puppe hernimmt und in Text und Bild verwandelt, so wird auch dies sehr schnell Teil der Nonsense-Literatur dieser Website!</p>
+    </div>
+
+</body>
+
 
 
 

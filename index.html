@@ -45,17 +45,21 @@
 })();
 </script>
 
+
+
 <nav class="main-nav fett" aria-label="Hauptnavigation">
-  <ul>
+  <button class="nav-toggle" aria-controls="nav-list" aria-expanded="false" aria-label="Navigation ein-/ausklappen">☰<span class="sr-only">Navigation ein-/ausklappen</span></button>
+  <ul id="nav-list" class="nav-list">
     <li><a href="index.html">Start</a></li>
-    <li><a href="#news">Jabberwocky</a></li>
+    <li><a href="jabber.html">Jabberwocky</a></li>
+    <li><a href="baum.html">Baum aus Wörtern</a></li>
     <li><a href="matroshka.html">Matroshka</a></li>
-    <li><a href="#about">What's this?</a></li>
+    <li><a href="feedback.html">What's this?</a></li>
   </ul>
 </nav>
 
-    <h1 class="fett">Nonsense</h1>
-    <p> ist eine meiner liebsten Literaturrichtungen. Deswegen widme ich diese Übungswebsite diesem Thema.</p>
+    <h1 class="fett unterstrichen zentriert">Nonsense</h1>
+    <p class="zentriert"> ist eine meiner liebsten Literaturrichtungen. Deswegen widme ich diese Übungswebsite diesem Thema.</p>
     <p style="margin-top: 60px;"> </p>
     <main>
     <h2 class="unterstrichen">Was ist Nonsense?</h2>
@@ -65,47 +69,6 @@
     Insgesamt ist Nonsense eine kreative und spielerische Art der Literatur, die dazu einlädt, die Welt aus einer anderen Perspektive zu betrachten und die Freude an der Sprache zu entdecken.</p>
     <p class="kursiv kleiner">Als kleine Bemerkung hier am Rande: Visual Studio Code ist definitiv ein sehr cooles Programm, da es die Informationen hierüber selbstständig erstellt hat (ich hätte gerne Lewis Carroll selbst erwähnt).</p>
     <p style="margin-top: 60px;"> </p>
-
-    <p>Hier ein wunderbares Beispiel für eben eines dieser Werke, worin ich so großen Gefallen finde:</p>
-    <section class="zentriert-img" style="--zent-img: url('../img/jabber.jpg')">
-    <div class="zentriert-img-content zentriert">
-        <h3 style="display:inline; font-weight:bold;">Jabberwocky</h3><br>
-        'Twas brillig, and the slithy toves<br>
-        Did gyre and gimble in the wabe;<br>
-        All mimsy were the borogoves,<br>
-        And the mome raths outgrabe.<br><br>
-        "Beware the Jabberwock, my son!<br>
-        The jaws that bite, the claws that catch!<br>
-        Beware the Jubjub bird, and shun<br>
-        The frumious Bandersnatch!"<br><br>
-        He took his vorpal sword in hand;<br>
-        Long time the manxome foe he sought—<br>
-        So rested he by the Tumtum tree<br>
-        And stood awhile in thought.<br><br>
-        And as in uffish thought he stood,<br>
-        The Jabberwock, with eyes of flame,<br>
-        Came whiffling through the tulgey wood,<br>
-        And burbled as it came!<br><br>
-        One, two! One, two! And through and through<br>
-        The vorpal blade went snicker-snack!<br>
-        He left it dead, and with its head<br>
-        He went galumphing back.<br><br>
-        "And hast thou slain the Jabberwock?<br>
-        Come to my arms, my beamish boy!<br>
-        O frabjous day! Callooh! Callay!"<br>
-        He chortled in his joy.<br><br>
-        'Twas brillig, and the slithy toves<br>
-        Did gyre and gimble in the wabe;<br>
-        All mimsy were the borogoves,<br>
-        And the mome raths outgrabe.<br>
-    </div>
-    </section>
-    <p style="margin-top: 30px;"> </p>
-
-    <p> Nicht nur ist dieses Werk in altenglischer Sprache verfasst, sondern Lewis Caroll verwendete sogar eigene selbsterfundene Worte (Wortneuschöpfungen), um den Takt des Gedichtes zu vollenden.
-    <span class="d-r-k">01.10.2025</span>
-    </p>
-
 
     <p>Weitere Beispiele für Nonsense-Literatur sind etwa die Gedichte von Christian Morgenstern, wie "Die unmögliche Tatsache" oder "Das große Lalula". <br>
     Auch moderne Werke und visuelle Experimente, wie 
@@ -117,9 +80,34 @@
         </span>
     </span> 
     zeigen, wie vielfältig und kreativ Nonsense sein kann.</p>
-    <span class="d-r-k">09.10.2025</span>
-    <span class="d-r-k">20.11.2025</span>
-    <span class="d-r-k">01.01.2026</span>
     </main>
+
+<script>
+(function(){
+  const nav = document.querySelector('.main-nav');
+  const btn = nav && nav.querySelector('.nav-toggle');
+  const list = nav && nav.querySelector('#nav-list');
+  if (!btn || !list) return;
+  btn.addEventListener('click', function(){
+    const expanded = this.getAttribute('aria-expanded') === 'true';
+    this.setAttribute('aria-expanded', String(!expanded));
+    nav.classList.toggle('nav-open', !expanded);
+  });
+  // Close menu on outside click or Escape
+  document.addEventListener('click', function(e){
+    if (!nav.contains(e.target) && nav.classList.contains('nav-open')) {
+      btn.setAttribute('aria-expanded','false');
+      nav.classList.remove('nav-open');
+    }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && nav.classList.contains('nav-open')) {
+      btn.setAttribute('aria-expanded','false');
+      nav.classList.remove('nav-open');
+      btn.focus();
+    }
+  });
+})();
+</script>
 
 </body>

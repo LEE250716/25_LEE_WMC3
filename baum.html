@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Baum aus Wörtern</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" href="CSS/img-styles.css">
+</head>
+
+<body class="zentriert">
+
+<nav class="main-nav fett" aria-label="Hauptnavigation">
+  <button class="nav-toggle" aria-controls="nav-list" aria-expanded="false" aria-label="Navigation ein-/ausklappen">☰<span class="sr-only">Navigation ein-/ausklappen</span></button>
+  <ul id="nav-list" class="nav-list">
+    <li><a href="index.html">Start</a></li>
+    <li><a href="jabber.html">Jabberwocky</a></li>
+    <li><a href="baum.html">Baum aus Wörtern</a></li>
+    <li><a href="matroshka.html">Matroshka</a></li>
+    <li><a href="feedback.html">What's this?</a></li>
+  </ul>
+</nav>
+
+
+<script>
+(function(){
+  const nav = document.querySelector('.main-nav');
+  const btn = nav && nav.querySelector('.nav-toggle');
+  const list = nav && nav.querySelector('#nav-list');
+  if (!btn || !list) return;
+  btn.addEventListener('click', function(){
+    const expanded = this.getAttribute('aria-expanded') === 'true';
+    this.setAttribute('aria-expanded', String(!expanded));
+    nav.classList.toggle('nav-open', !expanded);
+  });
+  // Close menu on outside click or Escape
+  document.addEventListener('click', function(e){
+    if (!nav.contains(e.target) && nav.classList.contains('nav-open')) {
+      btn.setAttribute('aria-expanded','false');
+      nav.classList.remove('nav-open');
+    }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && nav.classList.contains('nav-open')) {
+      btn.setAttribute('aria-expanded','false');
+      nav.classList.remove('nav-open');
+      btn.focus();
+    }
+  });
+})();
+</script>
+
+    <p style="margin-top:var(--nav-height);"> Hier könnte Ihre Werbung stehen.</p>
+    <p> Da wir aber nun nichts zum Bewerben haben,</p>
+    <p> pflanzen wir hier nun stattdessen einen Baum.</p>
+    <p> Ein paar Zweige links, ein paar Zweige rechts. Zentriert ist leider symmetrisch.</p>
+    <p> Eigentlich pflanzen wir keinen richtigen Baum.</p>
+    <p> Bäume beginnen nämlich eigentlich an der Wurzel.</p>
+    <p> Und wir beginnen mit Zweigen und Blättern.</p>
+    <p> Oh, hier haben wir wieder eine lange Zeile für Äste und dergleichen.</p>
+    <p> Aber sie hält nun auch nicht ewig</p>
+    <p> Und so langsam wird's weniger</p>
+    <p> Und noch weniger</p>
+    <p> Eventuell</p>
+    <p> sind wir</p>
+    <p> nun im</p>
+    <p> Stamm</p>
+    <p> also</p>
+    <p> fast</p>
+    <p> an der</p>
+    <p> Wurzel</p>
+    <p> wo wir</p>
+    <p> sowieso</p>
+    <p> ankommen</p>
+    <p> wollten</p>
+    <p> um einen</p>
+    <p> schönen</p>
+    <p> Baum zu</p>
+    <p> pflanzen.</p>
+    <p> Also ist</p>
+    <p> dies hier</p>
+    <p> unser toller</p>
+    <p> Anfang.</p>
+    <p> Nicht der schönste Baum, besonders nicht aus Wörtern. Aber er dient dem Konzept wie man diese Bäume erschaffen kann und somit (mit zugekniffenen Augen) dient er seinem Zweck erfolgreich. Man hätte das ganze natürlich noch unterhaltsamer gestalten können, indem man mit diversen Funktionen und Formatierungen Wörter als Blätter auf den Baum klebt, aber ehrlich gesagt, ist mir das gerade den Aufwand auch nicht ganz wert, das zu tun. Man hätte eventuell auch einen anderen Teil der Nonsense-Literatur verwenden können: Dass der Baum sowohl von unten als auch von oben lesbar wäre. Somit hätte der Anfang an der Wurzel einen doppelten Sinn. Vielen Dank für das Ansehen und Lesen dieser Seite. Diese Schrift ist definitiv nicht umständlich oder schwer lesbar, nein, ganz und gar nicht. Lesen Sie immer noch? Nun, ich schätze, auch das hier ist irgendwie Teil der Nonsense-Literatur. Freude an der Sprache und wie sie einen in einem Bann ziehen kann... Endet dieser Text bald? Ja, gleich da drü...hier.</p>
+
+
+
+
+</body>
+
+
+
+
+</html>

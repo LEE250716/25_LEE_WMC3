@@ -2,9 +2,8 @@
 body {
     font-size: 18px;
     color: #222;
-    background: #d3ebf8;
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
+    background: lightgrey;
+    font-family: lucida handwriting, 'Comic Sans MS', cursive, sans-serif;
     position: relative;
     /* Höhe der Navigation (verwendet für Inhaltspadding) */
     --nav-height: 3.5rem;
@@ -45,10 +44,11 @@ body::after {
 }
 
 /* Inhalt über den Säulen anzeigen */
+/* Position children relatively but avoid forcing a z-index so curtain layers can be stacked above or below as needed */
 body > * {
     position: relative;
-    z-index: 1;
-}
+    z-index: auto;
+} 
 
 /* ===== Top Navigation ===== */
 .main-nav {
@@ -64,7 +64,7 @@ body > * {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 100% auto;
-    background-color: rgba(255,255,255,0.9); /* leichter Hintergrund für Lesbarkeit */
+    background-color: lightcyan; /* leichter Hintergrund für Lesbarkeit */
     box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     padding: 0 2em;
     box-sizing: border-box;
@@ -88,27 +88,49 @@ body > * {
     color: inherit;
     padding: 0.4rem 0.6rem;
     display: inline-block;
+
+    &:focus, &:hover {
+        background: orange;
+        border-radius: 4px;
+    }
 }
 
-.main-nav a:focus,
-.main-nav a:hover {
-    background: rgba(0,0,0,0.06);
-    border-radius: 4px;
+.nav-toggle {
+    display: none;
+    background: transparent;
+    border: 0;
+    font-size: 1.25rem;
+    padding: 0.25rem 0.5rem;
+    color: inherit;
+    cursor: pointer;
+}
+
+/* helper for screen-readers */
+.sr-only {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0);
+    white-space: nowrap; border: 0;
 }
 
 /* ===== Überschriften ===== */
 h1 {
-    font-size: 3.5em;
-    color: #fa7821;
-    font-weight: bold;
+    font-size: 5.5em;
+    color: black;
     margin: calc(var(--nav-height) + 0.5rem) 0 0.1em 0;
+    font-family: Blackadder ITC, 'Comic Sans MS', cursive, sans-serif;
+    text-shadow: cyan 5px 5px 20px;
 }
 
 h2 {
     font-size: 2em;
-    color: #61b15a;
+    color: green;
     font-weight: bold;
     margin: 0.67em 0;
+    font-family: curlz MT, 'Comic Sans MS', cursive, sans-serif;
+    font-size: 3em;
+    text-shadow: lightblue 5px 5px 2px;
 }
 
 /* ===== Responsives Verhalten für schmale Viewports ===== */
@@ -134,9 +156,9 @@ main {
 
 /* Auf sehr schmalen Geräten (z.B. Smartphones) */
 @media (max-width: 600px) {
+    
     body {
-        max-width: auto;
-        padding: 0 auto;
+        --nav-height: 5em;
     }
 
     h1 {
@@ -146,21 +168,195 @@ main {
         font-size: 1.5em;
         overflow-wrap: normal;
     }
-}
 
-/* Responsiveness for the nav and headings */
-@media (max-width: 600px) {
-    .main-nav {
-        height: calc(var(--nav-height) - 0.5rem);
-        padding: 0 1rem;
-        background-size: auto 120%;
+    /* Keep nav compact; add toggle button and collapsible menu */
+    .nav-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: 0;
+        font-size: 1.5rem;
+        padding: 0.25rem 0.5rem;
+        color: inherit;
+        cursor: pointer;
     }
 
+    .main-nav {
+        height: var(--nav-height);
+        padding: 0 1rem;
+    }
+
+    /* Hide horizontal list and use vertical collapsible one */
+    .main-nav ul {
+        display: none;
+    }
+
+    .main-nav .nav-list {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+
+    .main-nav.nav-open .nav-list {
+        display: flex;
+        position: absolute;
+        top: var(--nav-height);
+        left: 0;
+        right: 0;
+        background: lightcyan;
+        padding: 0.75rem 1rem;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+        z-index: 102;
+    }
+
+    .main-nav .nav-list a {
+        display: block;
+        padding: 0.6rem 0.5rem;
+    }
+
+    /* adjust heading spacing when menu is closed */
     h1 {
         font-size: 2.5em;
-        margin-top: calc(var(--nav-height) - 0.5rem);
+        margin-top: calc(var(--nav-height) + 0.5rem);
+    }
+
+    /* screen-reader helper - redundant but safe here */
+    .sr-only {
+        position: absolute !important;
+        width: 1px; height: 1px;
+        padding: 0; margin: -1px;
+        overflow: hidden; clip: rect(0 0 0 0);
+        white-space: nowrap; border: 0;
     }
 }
+
+/* ===== Curtain / Vorhang (full-page, split panels) ===== */
+.curtain {
+    position: fixed;
+    inset: 0;
+    z-index: 0; /* behind content */
+    pointer-events: none; /* panels don't block by default */
+    --open-percent: 0%; /* 0% closed, 100% fully open */
+}
+.curtain .panel {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    /* use a tint CSS variable on top of the image for per-layer coloring */
+    background-image: linear-gradient(var(--tint, rgba(0,0,0,0)), var(--tint, rgba(0,0,0,0))), url('../img/vorhang.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    transition: transform 320ms ease;
+    pointer-events: auto; /* handles are interactive */
+    will-change: transform;
+}
+
+/* Color controls UI */
+.curtain-color-controls summary { cursor: pointer; font-weight: bold; }
+.curtain-color-controls .layer-controls { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.4rem; margin-top: 0.5rem; }
+.curtain-color-controls label { font-size: 0.9rem; display: flex; align-items: center; gap: 0.4rem; }
+.curtain-color-controls input[type="color"] { width: 2.2rem; height: 2.2rem; padding: 0; border: 0; }
+.curtain-color-controls input[type="range"] { width: 6.5rem; }
+.curtain-color-controls button { padding: 0.3rem 0.5rem; }
+
+/* keep controls above layers */
+.curtain-controls { z-index: 100; }
+
+.curtain .panel.left { left: 0; transform: translateX(calc(-1 * var(--open-percent))); background-position: center left; }
+.curtain .panel.right { right: 0; transform: translateX(var(--open-percent)); background-position: center right; }
+
+/* fully open when --open-percent == 100% */
+.curtain.open { --open-percent: 100%; }
+
+/* small visible handle in the middle edge of each panel */
+.curtain .handle {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2.2rem;
+    height: 4.2rem;
+    background: rgba(0,0,0,0.35);
+    color: #fff;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: ew-resize;
+    user-select: none;
+    font-weight: bold;
+}
+.curtain .handle.left { right: 0.5rem; }
+.curtain .handle.right { left: 0.5rem; }
+
+/* controls (button + slider) */
+.curtain-controls {
+    position: fixed;
+    top: calc(var(--nav-height) + 0.75rem);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100; /* above all layers */
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+.curtain-controls button { padding: 0.35rem 0.6rem; }
+.curtain-controls input[type="range"] { width: 14rem; }
+
+/* Ensure content does not force a z-index so curtain layers can be stacked above if desired */
+body > * { position: relative; z-index: auto; }
+
+/* Multi-layer stacking specifics (7 layers) */
+.curtain .layer { position: absolute; inset: 0; --open-percent: 0%; }
+.curtain .layer .panel { width: 50%; background-size: cover; background-repeat: no-repeat; }
+.curtain .layer .panel.left { left: 0; transform: translateX(calc(-1 * var(--open-percent))); background-position: center left; }
+.curtain .layer .panel.right { right: 0; transform: translateX(var(--open-percent)); background-position: center right; }
+
+/* stacking order (front-most first) and subtle darkening for depth (20 layers) */
+.curtain .layer:nth-child(1)  { z-index: 20; filter: brightness(1.00); }
+.curtain .layer:nth-child(2)  { z-index: 19; filter: brightness(0.98); }
+.curtain .layer:nth-child(3)  { z-index: 18; filter: brightness(0.96); }
+.curtain .layer:nth-child(4)  { z-index: 17; filter: brightness(0.94); }
+.curtain .layer:nth-child(5)  { z-index: 16; filter: brightness(0.92); }
+.curtain .layer:nth-child(6)  { z-index: 15; filter: brightness(0.90); }
+.curtain .layer:nth-child(7)  { z-index: 14; filter: brightness(0.88); }
+.curtain .layer:nth-child(8)  { z-index: 13; filter: brightness(0.86); }
+.curtain .layer:nth-child(9)  { z-index: 12; filter: brightness(0.84); }
+.curtain .layer:nth-child(10) { z-index: 11; filter: brightness(0.82); }
+.curtain .layer:nth-child(11) { z-index: 10; filter: brightness(0.80); }
+.curtain .layer:nth-child(12) { z-index: 9;  filter: brightness(0.78); }
+.curtain .layer:nth-child(13) { z-index: 8;  filter: brightness(0.76); }
+.curtain .layer:nth-child(14) { z-index: 7;  filter: brightness(0.74); }
+.curtain .layer:nth-child(15) { z-index: 6;  filter: brightness(0.72); }
+.curtain .layer:nth-child(16) { z-index: 5;  filter: brightness(0.70); }
+.curtain .layer:nth-child(17) { z-index: 4;  filter: brightness(0.68); }
+.curtain .layer:nth-child(18) { z-index: 3;  filter: brightness(0.66); }
+.curtain .layer:nth-child(19) { z-index: 2;  filter: brightness(0.64); }
+.curtain .layer:nth-child(20) { z-index: 1;  filter: brightness(0.62); }
+
+/* Center fixed page text */
+.center-text {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 30%;
+    z-index: -1; /* below curtains so it only shows when panels are moved away */
+    color: #000000;
+    padding: 0.4rem 0.75rem;
+    background: rgba(114, 245, 238, 0.5);
+    border-radius: 6px;
+    font-size: 1rem;
+    text-align: center;
+    pointer-events: none;
+    font-family: arial, sans-serif;
+}
+@media (max-width: 600px) {
+    .center-text { font-size: 0.95rem; }
+}
+
 
 /* ===== Texttyp: Größe & Farbe ===== */
 p {
@@ -212,3 +408,16 @@ p {
 .zentriert {
     text-align: center;
 }
+
+/* ===== Survey styles for feedback.html ===== */
+.survey { max-width: 900px; margin: 2rem auto; background: rgba(120, 255, 248, 0.2); padding: 1rem; border-radius: 6px; color: #111; box-shadow: 0 6px 16px rgba(0,0,0,0.08); }
+.survey fieldset{ border:0; padding:0.5rem 0; margin:0.25rem 0; }
+.survey legend{ font-weight:bold; }
+.survey label{ display:block; padding:0.25rem 0; }
+.survey-actions{ display:flex; gap:0.5rem; margin-top:0.5rem; }
+.survey-results{ margin-top:1rem; padding:0.75rem; border-radius:6px; background:#f3f3f3; color:#111; }
+.survey-results a{ font-weight:bold; color: rebeccapurple; }
+@media (max-width:600px){ .survey{ margin:1rem; padding:0.75rem; } }
+
+/* Hide the original/older survey if present: we'll use the newer one below */
+#feedback-survey { display: none !important; }

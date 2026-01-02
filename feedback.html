@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vorpal Feedblade</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" href="CSS/img-styles.css">
+</head>
+
+<body style="background-image: url('../img/vorpal_blade2.jpg'); background-repeat: no-repeat; background-size: cover; text-shadow: lightcyan 0px 0px 15px; font-weight: bold;">
+
+<nav class="main-nav fett" aria-label="Hauptnavigation">
+  <button class="nav-toggle" aria-controls="nav-list" aria-expanded="false" aria-label="Navigation ein-/ausklappen">☰<span class="sr-only">Navigation ein-/ausklappen</span></button>
+  <ul id="nav-list" class="nav-list">
+    <li><p style="color: darkred;">Haben Sie bereits ein positives Feedback gegeben?</p></li>
+    <li><a href="index.html">LAUF!</a></li>
+    <li><p style="color: darkred;">Sonst kommt das Vorpalschwert und holt es sich!</p></li>
+  </ul>
+</nav>
+
+
+<script>
+(function(){
+  const nav = document.querySelector('.main-nav');
+  const btn = nav && nav.querySelector('.nav-toggle');
+  const list = nav && nav.querySelector('#nav-list');
+  if (!btn || !list) return;
+  btn.addEventListener('click', function(){
+    const expanded = this.getAttribute('aria-expanded') === 'true';
+    this.setAttribute('aria-expanded', String(!expanded));
+    nav.classList.toggle('nav-open', !expanded);
+  });
+  // Close menu on outside click or Escape
+  document.addEventListener('click', function(e){
+    if (!nav.contains(e.target) && nav.classList.contains('nav-open')) {
+      btn.setAttribute('aria-expanded','false');
+      nav.classList.remove('nav-open');
+    }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && nav.classList.contains('nav-open')) {
+      btn.setAttribute('aria-expanded','false');
+      nav.classList.remove('nav-open');
+      btn.focus();
+    }
+  });
+})();
+</script>
+
+    <h1>Vorpal Feedblade</h1>
+    <p>Das Vorpalschwert ist eine fiktive Waffe aus Lewis Carrolls Gedicht "Jabberwocky", das verwendet wird um genau diesen Jabberwocky zu besiegen.</p>
+    <p>In unterschiedlichen moderneren Medien wird vorpal verwendet, um etwas besonders Scharfes zu kennzeichnen.</p>
+    <p>Manche sehen diese Klinge auch als einzige Waffe, die den Jabberwocky besiegen konnte oder eine Waffe, die besonders einfach enthaupten kann.</p>
+    <p>In diesem Sinne: Ist dies ein besonders scharfer Feedbackbogen. Der gegebenenfalls eine Klinge enthält.</p>
+
+
+
+
+<section id="feedback-survey-v2" class="survey" aria-labelledby="survey-title-v2">
+  <h2 id="survey-title-v2">Vorpal Feedblade - Bogen</h2>
+  <form id="survey-form-v2" aria-describedby="survey-instructions-v2">
+    <p id="survey-instructions-v2">Bitte beantworten Sie folgende Fragen: mehrere Antworten können gewählt werden.</p>
+
+    <fieldset>
+      <legend>1) Hat Ihnen diese Website gefallen?</legend>
+      <label><input type="checkbox" name="q1" value="design"> Ja.</label>
+      <label><input type="checkbox" name="q1" value="lesbarkeit"> Ja.</label>
+      <label><input type="checkbox" name="q1" value="navigation"> Ja.</label>
+      <label><input type="checkbox" name="q1" value="navigation"> Ahhhhhh!</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>2) Haben Sie auf der Startseite unten auf "ein Baum aus Wörtern" geklickt?</legend>
+      <label><input type="checkbox" name="q2" value="vorhang"> Ja.</label>
+      <label><input type="checkbox" name="q2" value="farben"> Nein.</label>
+      <label><input type="checkbox" name="q2" value="interaktion"> Welche Startseite?</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>3) Hätten Sie gerne noch zusätzlich Animationen oder Funktionen gesehen?</legend>
+      <label><input type="checkbox" name="q3" value="layout"> Nein, alles ist perfekt.</label>
+      <label><input type="checkbox" name="q3" value="content"> Ein paar mehr Funktionen.</label>
+      <label><input type="checkbox" name="q3" value="humor"> Ein paar Animationen.</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>4) Hatten Sie Spaß beim Erkunden dieser Seiten?</legend>
+      <label><input type="checkbox" name="q4" value="zugang"> Nein, ich hasse alles daran.</label>
+      <label><input type="checkbox" name="q4" value="mobile"> Ja, ich liebe es.</label>
+      <label><input type="checkbox" name="q4" value="kontrast"> Ja, aber manches war mühsam.</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>5) Würden Sie erneut eine meiner Seiten besuchen?</legend>
+      <label><input type="checkbox" name="q5" value="zugang"> Nein. Ich bin nicht masochistisch.</label>
+      <label><input type="checkbox" name="q5" value="mobile"> Ja, ich bin masochistisch.</label>
+      <label><input type="checkbox" name="q5" value="kontrast"> Ja, ich bin gespannt wie Sie sich entwickeln.</label>
+    </fieldset>
+    
+    <fieldset>
+      <legend>6) Zu welcher Note würden Sie tendieren?</legend>
+      <label><input type="checkbox" name="q6" value="zugang"> 1</label>
+      <label><input type="checkbox" name="q6" value="zugang"> 1</label>
+      <label><input type="checkbox" name="q6" value="zugang"> 1</label>
+      <label><input type="checkbox" name="q6" value="zugang"> 2</label>
+      <label><input type="checkbox" name="q6" value="zugang"> 3</label>
+      <label><input type="checkbox" name="q6" value="zugang"> 4</label>
+      <label><input type="checkbox" name="q6" value="zugang"> doch 1</label>
+    </fieldset>
+
+    <div class="survey-actions">
+      <button type="submit">Fertig</button>
+      <button type="reset" id="survey-reset-v2">Zurücksetzen</button>
+    </div>
+  </form>
+
+  <div id="survey-results-v2" class="survey-results" aria-live="polite" hidden></div>
+
+  <script>
+  (function(){
+    const form = document.getElementById('survey-form-v2');
+    const results = document.getElementById('survey-results-v2');
+    if (!form) return;
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      const data = new FormData(form);
+      const q1 = data.getAll('q1').length;
+      const q2 = data.getAll('q2').length;
+      const q3 = data.getAll('q3').length;
+      const q4 = data.getAll('q4').length;
+      const score = q1 + q2 + q3 + q4; // 0..12
+
+      let verdict = '';
+      if (score >= 23) verdict = 'Heute wird das Vorpalschwert geschärft!';
+      else if (score >= 15) verdict = 'Das Vorpalschwert ist bereits beschäftigt...';
+      else if (score >= 9) verdict = 'Dem Vorpalschwert gefällt dein Feedback!';
+      else if (score < 6) verdict = 'Das Vorpalschwert wird dich finden...';
+      else verdict = 'Heute ruht das Vorpalschwert.';
+
+      results.hidden = false;
+      results.innerHTML = '<p><strong>Ergebnis:</strong> ' + verdict + '</p>' +
+        '<p>Ausgewählte Punkte: ' + score + '</p>' +
+        '<p><a href="index.html">Zurück zur Startseite</a></p>';
+      results.scrollIntoView({behavior:'smooth'});
+    });
+
+    document.getElementById('survey-reset-v2').addEventListener('click', ()=>{ results.hidden = true; results.innerHTML = ''; });
+  })();
+  </script>
+
+</body>
+
+
+
+
+</html>

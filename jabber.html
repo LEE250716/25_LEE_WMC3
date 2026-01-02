@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jabberwocky</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" href="CSS/img-styles.css">
+</head>
+
+<body>
+
+<nav class="main-nav fett" aria-label="Hauptnavigation">
+  <button class="nav-toggle" aria-controls="nav-list" aria-expanded="false" aria-label="Navigation ein-/ausklappen">☰<span class="sr-only">Navigation ein-/ausklappen</span></button>
+  <ul id="nav-list" class="nav-list">
+    <li><a href="index.html">Start</a></li>
+    <li><a href="jabber.html">Jabberwocky</a></li>
+    <li><a href="baum.html">Baum aus Wörtern</a></li>
+    <li><a href="matroshka.html">Matroshka</a></li>
+    <li><a href="feedback.html">What's this?</a></li>
+  </ul>
+</nav>
+
+
+<script>
+(function(){
+  const nav = document.querySelector('.main-nav');
+  const btn = nav && nav.querySelector('.nav-toggle');
+  const list = nav && nav.querySelector('#nav-list');
+  if (!btn || !list) return;
+  btn.addEventListener('click', function(){
+    const expanded = this.getAttribute('aria-expanded') === 'true';
+    this.setAttribute('aria-expanded', String(!expanded));
+    nav.classList.toggle('nav-open', !expanded);
+  });
+  // Close menu on outside click or Escape
+  document.addEventListener('click', function(e){
+    if (!nav.contains(e.target) && nav.classList.contains('nav-open')) {
+      btn.setAttribute('aria-expanded','false');
+      nav.classList.remove('nav-open');
+    }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && nav.classList.contains('nav-open')) {
+      btn.setAttribute('aria-expanded','false');
+      nav.classList.remove('nav-open');
+      btn.focus();
+    }
+  });
+})();
+</script>
+
+    <p style="margin-top:var(--nav-height);">Hier ein wunderbares Beispiel für eben eines dieser Werke, worin ich so großen Gefallen finde:</p>
+    <section class="zentriert-img" style="--zent-img: url('../img/jabber.jpg')">
+    <div class="zentriert-img-content zentriert" style="font-family: Arial, Helvetica, sans-serif;">
+        <h3 style="display:inline; font-weight:bold;">Jabberwocky</h3><br>
+        'Twas brillig, and the slithy toves<br>
+        Did gyre and gimble in the wabe;<br>
+        All mimsy were the borogoves,<br>
+        And the mome raths outgrabe.<br><br>
+        "Beware the Jabberwock, my son!<br>
+        The jaws that bite, the claws that catch!<br>
+        Beware the Jubjub bird, and shun<br>
+        The frumious Bandersnatch!"<br><br>
+        He took his vorpal sword in hand;<br>
+        Long time the manxome foe he sought—<br>
+        So rested he by the Tumtum tree<br>
+        And stood awhile in thought.<br><br>
+        And as in uffish thought he stood,<br>
+        The Jabberwock, with eyes of flame,<br>
+        Came whiffling through the tulgey wood,<br>
+        And burbled as it came!<br><br>
+        One, two! One, two! And through and through<br>
+        The vorpal blade went snicker-snack!<br>
+        He left it dead, and with its head<br>
+        He went galumphing back.<br><br>
+        "And hast thou slain the Jabberwock?<br>
+        Come to my arms, my beamish boy!<br>
+        O frabjous day! Callooh! Callay!"<br>
+        He chortled in his joy.<br><br>
+        'Twas brillig, and the slithy toves<br>
+        Did gyre and gimble in the wabe;<br>
+        All mimsy were the borogoves,<br>
+        And the mome raths outgrabe.<br>
+    </div>
+    </section>
+    <p style="margin-top: 30px;"> </p>
+
+    <p> Nicht nur ist dieses Werk in altenglischer Sprache verfasst, sondern Lewis Caroll verwendete sogar eigene selbsterfundene Worte (Wortneuschöpfungen), um den Takt des Gedichtes zu vollenden.</p>
+
+
+
+</body>
+
+
+
+
+</html>
