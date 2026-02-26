@@ -1,0 +1,39 @@
+/* Basic typography classes and page formatting */
+
+/* font style helpers */
+.bold { font-weight: bold; }
+.italic { font-style: italic; }
+.underline { text-decoration: underline; }
+.strikethrough { text-decoration: line-through; }
+
+/* font families and default size/color */
+body, html {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 16px;
+    color: #181717;
+    margin: 0;
+    padding: 0;
+    background: #8a7029; /* ggf. Parchment background image oder Farbverlauf hinzufügen */
+
+}
+
+/* heading styles for contrast */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+    color: #2c2c2c;
+}
+
+/* small utility classes */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-left { text-align: left; }
+
+/* links with subtle vintage feel */
+a {
+    color: #800000;
+    text-decoration: none;
+}
+
+a:hover, a:focus {
+    text-decoration: underline;
+}
