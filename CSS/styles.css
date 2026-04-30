@@ -13,7 +13,7 @@ body, html {
     color: #181717;
     margin: 0;
     padding: 0;
-    background: #8a7029; /* ggf. Parchment background image oder Farbverlauf hinzufügen */
+    background: #564ad8; /* ggf. Parchment background image oder Farbverlauf hinzufügen */
 
 }
 
@@ -27,6 +27,72 @@ h1, h2, h3, h4, h5, h6 {
 .text-center { text-align: center; }
 .text-right { text-align: right; }
 .text-left { text-align: left; }
+
+/* TODO List Styles */
+#todo-input-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: left;
+}
+
+#todo-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+}
+
+#add-todo-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#add-todo-btn:hover {
+    background: #45a049;
+}
+
+#todo-list {
+    list-style: none;
+    padding: 0;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+#todo-list li {
+    background: white;
+    margin: 5px 0;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#todo-list li:hover {
+    background: #f0f0f0;
+}
+
+#todo-list li button {
+    background: #ff4444;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#todo-list li button:hover {
+    background: #cc0000;
+}
 
 /* links with subtle vintage feel */
 a {

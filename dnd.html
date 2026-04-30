@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DnD-Charakter erschaffen</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" href="CSS/img-styles.css">
+
+</head>
+
+<body>
+    <!-- body uses font family and parchment background defined in CSS/styles.css -->
+    <p class="bold">Machen wir hier einen DnD-Charakter Editor.</p>
+    <p>Dazu brauchen wir
+    - einen integrierten Link für die Stats - idealerweise auch mit einer Verbindung für die fertigen Stats (vllt auch selbst bauen).
+    - die Klassen und Fähigkeiten
+    - die Rassen
+    - die Ausrüstung
+    - die Zauber
+    - Hintergrund (wahrscheinlich homebrew mit Standardvariation als Beispiele)
+    - Felder für Name, Geschlecht, Alter, Größe, Gewicht, Augenfarbe, Haarfarbe, Hautfarbe, Gesichtsbehaarung, Besonderheiten
+    - Felder für Ideale, Bindungen, Schwächen, Persönlichkeitsmerkmale & Sonstiges (Hintergrund)
+    - eine Möglichkeit, die Werte zu speichern (vllt auch mit einem Account-System - aber zumindest pdf)
+
+    - bekommen wir irgendwie eines dieser coolen Arrays in Verwendung? (z.B. für die Zauber, Ausrüstung, etc.)
+        Also z.b. Rüstung als Array aus Objecten - und in jedem Objekt die Eigenschaften (Name, RK, max GES, Heimlichkeit-NT [boolean], min. STR, Gewicht, Kosten)
+        array x:  x.filter( (wert) => wert.RK > 15 )  --> gibt alle Rüstungen mit RK > 15 zurück
+        ggf. natürlich auch 
+            const y = x.filter( (wert) => wert.RK > 15 )
+            y.forEach( (wert) => console.log(wert.Name) )  --> gibt die Namen aller Rüstungen mit RK > 15 zurück (besser für leicht/mittel/schwer)
+        Evtl. je eigenes object-array und dann zusammenfügen (l/m/s Rüstungen, einfache/Kriegs Waffen)
+
+
+    Idealerweise alles in einer Art Formular (Seite 1 ausfüllen, dann weiter zu Seite 2, etc.)
+    ggf. können wir noch etwas tiefer auf Klassen, Rassen, Ausrüstung und Zauber eingehen (Beschreibung, Filter, Sortierung, etc.) 
+    (Besonders bei Zaubern sollten wir das berücksichtigen für die unterschiedlichen Schulen und Zauberklassen)
+    </p>
+</body>
+
+<!-- zu Ostern daran arbeiten -->
