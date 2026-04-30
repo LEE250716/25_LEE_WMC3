@@ -11,7 +11,7 @@ body, html {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 16px;
     color: #181717;
-    margin: 0;
+    margin: 1vw;
     padding: 0;
     background: #564ad8; /* ggf. Parchment background image oder Farbverlauf hinzufügen */
 
@@ -56,6 +56,20 @@ h1, h2, h3, h4, h5, h6 {
 
 #add-todo-btn:hover {
     background: #45a049;
+}
+
+#open-todo-btn {
+    padding: 0.3rem 0.6rem;
+    font-size: 12px;
+    background: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#open-todo-btn:hover {
+    background: #a6d4f2;
 }
 
 #todo-list {
