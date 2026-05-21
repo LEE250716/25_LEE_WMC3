@@ -12,7 +12,7 @@ const COLORS = [
     "#4dff88",
     "#ffd24d",
     "#d24dff",
-    "#ff914d"
+    "#ff914d",
 ];
 
 let level = 1;
@@ -39,25 +39,23 @@ function getLevelColorCount() {
 }
 
 function createWall() {
-
     leftWall.length = 0;
     rightWall.length = 0;
 
     const colorCount = getLevelColorCount();
     const segmentHeight = canvas.height / colorCount;
 
-    for(let i=0;i<colorCount;i++){
-
+    for (let i = 0; i < colorCount; i++) {
         leftWall.push({
             color: COLORS[colorCount - 1 - i],
             y: i * segmentHeight,
-            height: segmentHeight
+            height: segmentHeight,
         });
 
         rightWall.push({
             color: COLORS[i],
             y: i * segmentHeight,
-            height: segmentHeight
+            height: segmentHeight,
         });
     }
 }
@@ -65,9 +63,11 @@ function createWall() {
 createWall();
 
 class Block {
-
-    constructor(x = canvas.width / 2 - GRID / 2, y = -GRID, controlled = false){
-
+    constructor(
+        x = canvas.width / 2 - GRID / 2,
+        y = -GRID,
+        controlled = false,
+    ) {
         const colorCount = getLevelColorCount();
 
         this.size = GRID;
@@ -84,44 +84,43 @@ class Block {
         this.landed = false;
     }
 
-    update(){
-        if(this.landed) return;
+    update() {
+        if (this.landed) return;
 
-        if(this.vx !== 0 || this.vy !== 0){
-            this.trail.push({x: this.x, y: this.y});
-            if(this.trail.length > 12) this.trail.shift();
+        if (this.vx !== 0 || this.vy !== 0) {
+            this.trail.push({ x: this.x, y: this.y });
+            if (this.trail.length > 12) this.trail.shift();
         }
 
         this.x += this.vx;
         this.y += this.vy;
         this.x = Math.max(0, Math.min(this.x, canvas.width - this.size));
 
-        if(this.y + this.size >= canvas.height){
-
+        if (this.y + this.size >= canvas.height) {
             this.triggerError();
             return;
         }
 
         const onLeftSide = this.x <= wallWidth * GRID;
-        const onRightSide = this.x + this.size >= canvas.width - wallWidth * GRID;
+        const onRightSide =
+            this.x + this.size >= canvas.width - wallWidth * GRID;
 
-        for(const block of placedBlocks){
-
-            if(this.x < block.x + block.size &&
-               this.x + this.size > block.x &&
-               this.y < block.y + block.size &&
-               this.y + this.size > block.y){
-
-                if(block.color !== this.color){
+        for (const block of placedBlocks) {
+            if (
+                this.x < block.x + block.size &&
+                this.x + this.size > block.x &&
+                this.y < block.y + block.size &&
+                this.y + this.size > block.y
+            ) {
+                if (block.color !== this.color) {
                     this.triggerError();
                     return;
                 }
 
                 const rowY = snapRow(block.y);
-                if(block.x < canvas.width / 2){
+                if (block.x < canvas.width / 2) {
                     this.x = getNextLeftX(rowY);
-                }
-                else{
+                } else {
                     this.x = getNextRightX(rowY);
                 }
                 this.y = rowY;
@@ -131,47 +130,42 @@ class Block {
             }
         }
 
-        if(onLeftSide){
-
+        if (onLeftSide) {
             const segment = getWallSegment(leftWall, this.y);
             const rowY = snapRow(this.y);
 
-            if(segment.color === this.color){
+            if (segment.color === this.color) {
                 this.x = getNextLeftX(rowY);
                 this.y = rowY;
                 this.vx = 0;
                 this.landed = true;
                 return;
-            }
-            else{
+            } else {
                 this.triggerError();
                 return;
             }
         }
 
-        if(onRightSide){
-
+        if (onRightSide) {
             const segment = getWallSegment(rightWall, this.y);
             const rowY = snapRow(this.y);
 
-            if(segment.color === this.color){
+            if (segment.color === this.color) {
                 this.x = getNextRightX(rowY);
                 this.y = rowY;
                 this.vx = 0;
                 this.landed = true;
                 return;
-            }
-            else{
+            } else {
                 this.triggerError();
                 return;
             }
         }
     }
 
-    draw(){
-
-        if(this.trail && this.trail.length){
-            for(let i = 0; i < this.trail.length; i++){
+    draw() {
+        if (this.trail && this.trail.length) {
+            for (let i = 0; i < this.trail.length; i++) {
                 const point = this.trail[i];
                 const alpha = (i + 1) / this.trail.length * 0.35;
                 ctx.fillStyle = `rgba(${hexToRgb(this.color)}, ${alpha})`;
@@ -187,7 +181,7 @@ class Block {
         ctx.strokeRect(this.x + 2, this.y + 2, this.size - 4, this.size - 4);
     }
 
-    triggerError(){
+    triggerError() {
         flashScreen();
         loseLife(false);
         this.vx = 0;
@@ -195,11 +189,9 @@ class Block {
     }
 }
 
-function getWallSegment(wall, y){
-
-    for(const seg of wall){
-
-        if(y >= seg.y && y <= seg.y + seg.height){
+function getWallSegment(wall, y) {
+    for (const seg of wall) {
+        if (y >= seg.y && y <= seg.y + seg.height) {
             return seg;
         }
     }
@@ -207,13 +199,16 @@ function getWallSegment(wall, y){
     return wall[0];
 }
 
-function snapRow(y){
+function snapRow(y) {
     const row = Math.round(y / GRID);
-    return Math.max(0, Math.min(row, Math.floor((canvas.height - GRID) / GRID))) * GRID;
+    return Math.max(
+        0,
+        Math.min(row, Math.floor((canvas.height - GRID) / GRID)),
+    ) * GRID;
 }
 
-function hexToRgb(hex){
-    const cleaned = hex.replace('#','');
+function hexToRgb(hex) {
+    const cleaned = hex.replace("#", "");
     const bigint = parseInt(cleaned, 16);
     const r = (bigint >> 16) & 255;
     const g = (bigint >> 8) & 255;
@@ -221,23 +216,28 @@ function hexToRgb(hex){
     return `${r}, ${g}, ${b}`;
 }
 
-function getNextLeftX(rowY){
-    const rowBlocks = placedBlocks.filter(b => b.y === rowY && b.x >= wallWidth * GRID && b.x < canvas.width / 2);
-    if(rowBlocks.length === 0){
+function getNextLeftX(rowY) {
+    const rowBlocks = placedBlocks.filter((b) =>
+        b.y === rowY && b.x >= wallWidth * GRID && b.x < canvas.width / 2
+    );
+    if (rowBlocks.length === 0) {
         return wallWidth * GRID;
     }
-    return Math.max(...rowBlocks.map(b => b.x)) + GRID;
+    return Math.max(...rowBlocks.map((b) => b.x)) + GRID;
 }
 
-function getNextRightX(rowY){
-    const rowBlocks = placedBlocks.filter(b => b.y === rowY && b.x <= canvas.width - wallWidth * GRID - GRID && b.x >= canvas.width / 2);
-    if(rowBlocks.length === 0){
+function getNextRightX(rowY) {
+    const rowBlocks = placedBlocks.filter((b) =>
+        b.y === rowY && b.x <= canvas.width - wallWidth * GRID - GRID &&
+        b.x >= canvas.width / 2
+    );
+    if (rowBlocks.length === 0) {
         return canvas.width - wallWidth * GRID - GRID;
     }
-    return Math.min(...rowBlocks.map(b => b.x)) - GRID;
+    return Math.min(...rowBlocks.map((b) => b.x)) - GRID;
 }
 
-function spawnRandomBlock(){
+function spawnRandomBlock() {
     const minX = wallWidth * GRID;
     const maxX = canvas.width - wallWidth * GRID - GRID;
     const availableColumns = Math.floor((maxX - minX) / GRID) + 1;
@@ -245,27 +245,28 @@ function spawnRandomBlock(){
     activeBlocks.push(new Block(x, -GRID, false));
 }
 
-function assignControlledBlock(exclude = null){
-    const candidates = activeBlocks.filter(b => !b.landed && b !== exclude).concat([]);
+function assignControlledBlock(exclude = null) {
+    const candidates = activeBlocks.filter((b) => !b.landed && b !== exclude)
+        .concat([]);
 
-    if(currentBlock && !currentBlock.landed && currentBlock !== exclude){
+    if (currentBlock && !currentBlock.landed && currentBlock !== exclude) {
         candidates.push(currentBlock);
     }
 
-    if(candidates.length === 0){
+    if (candidates.length === 0) {
         currentBlock = new Block(canvas.width / 2 - GRID / 2, -GRID, true);
         return;
     }
 
-    let lowest = candidates.reduce((a,b) => (a.y > b.y ? a : b));
+    let lowest = candidates.reduce((a, b) => (a.y > b.y ? a : b));
 
-    if(lowest !== currentBlock){
-        if(currentBlock && !currentBlock.landed && currentBlock !== exclude){
+    if (lowest !== currentBlock) {
+        if (currentBlock && !currentBlock.landed && currentBlock !== exclude) {
             activeBlocks.push(currentBlock);
         }
 
         const idx = activeBlocks.indexOf(lowest);
-        if(idx !== -1) activeBlocks.splice(idx,1);
+        if (idx !== -1) activeBlocks.splice(idx, 1);
 
         currentBlock = lowest;
         currentBlock.controlled = true;
@@ -278,99 +279,96 @@ function assignControlledBlock(exclude = null){
 let currentBlock = new Block(canvas.width / 2 - GRID / 2, -GRID, true);
 const placedBlocks = [];
 
-function drawWalls(){
-
-    for(let i=0;i<leftWall.length;i++){
-
+function drawWalls() {
+    for (let i = 0; i < leftWall.length; i++) {
         const seg = leftWall[i];
         ctx.fillStyle = seg.color;
         ctx.fillRect(
             0,
             seg.y,
             wallWidth * GRID,
-            seg.height
+            seg.height,
         );
 
-        if(i < leftWall.length - 1){
+        if (i < leftWall.length - 1) {
             ctx.fillStyle = "black";
             ctx.fillRect(0, seg.y + seg.height - 5, wallWidth * GRID, 10);
         }
     }
 
-    for(let i=0;i<rightWall.length;i++){
-
+    for (let i = 0; i < rightWall.length; i++) {
         const seg = rightWall[i];
         ctx.fillStyle = seg.color;
         ctx.fillRect(
             canvas.width - wallWidth * GRID,
             seg.y,
             wallWidth * GRID,
-            seg.height
+            seg.height,
         );
 
-        if(i < rightWall.length - 1){
+        if (i < rightWall.length - 1) {
             ctx.fillStyle = "black";
-            ctx.fillRect(canvas.width - wallWidth * GRID, seg.y + seg.height - 5, wallWidth * GRID, 10);
+            ctx.fillRect(
+                canvas.width - wallWidth * GRID,
+                seg.y + seg.height - 5,
+                wallWidth * GRID,
+                10,
+            );
         }
     }
 }
 
-function updateUI(){
-
+function updateUI() {
     scoreEl.innerText = score;
     levelEl.innerText = level;
     livesEl.innerText = lives;
 }
 
-function loseLife(resetBlock = true){
+function loseLife(resetBlock = true) {
     lives -= 1;
     updateUI();
 
-    if(lives <= 0){
+    if (lives <= 0) {
         gameOver();
         return;
     }
 
-    if(resetBlock){
+    if (resetBlock) {
         currentBlock = new Block(canvas.width / 2 - GRID / 2, -GRID, true);
     }
 }
 
-function flashScreen(){
+function flashScreen() {
     flashTimer = 10;
 }
 
-function gameOver(){
-
-    alert("Game Over!\nPunkte: " + score);
-
-    location.reload();
+function gameOver() {
+    console.log("Game Over");
 }
 
-function update(){
-
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+function update() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     drawWalls();
 
-    for(const block of placedBlocks){
+    for (const block of placedBlocks) {
         block.draw();
     }
 
     spawnTimer -= 1;
-    if(spawnTimer <= 0){
-        if(activeBlocks.length < 4){
+    if (spawnTimer <= 0) {
+        if (activeBlocks.length < 4) {
             spawnRandomBlock();
         }
         spawnTimer = 40 + Math.floor(Math.random() * 40);
     }
 
-    for(let i = activeBlocks.length - 1; i >= 0; i--){
+    for (let i = activeBlocks.length - 1; i >= 0; i--) {
         const block = activeBlocks[i];
         block.update();
         block.draw();
 
-        if(block.landed){
+        if (block.landed) {
             placedBlocks.push(block);
             activeBlocks.splice(i, 1);
         }
@@ -380,20 +378,25 @@ function update(){
     currentBlock.draw();
 
     frame++;
-    if(currentBlock && !currentBlock.landed){
+    if (currentBlock && !currentBlock.landed) {
         const pulse = 0.5 + 0.5 * Math.sin(frame * 0.15);
         const alpha = 0.5 + 0.4 * Math.abs(Math.sin(frame * 0.15));
         const lineW = 4 + 2 * Math.abs(Math.sin(frame * 0.15));
         ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
         ctx.lineWidth = lineW;
-        ctx.strokeRect(currentBlock.x + 2, currentBlock.y + 2, currentBlock.size - 4, currentBlock.size - 4);
+        ctx.strokeRect(
+            currentBlock.x + 2,
+            currentBlock.y + 2,
+            currentBlock.size - 4,
+            currentBlock.size - 4,
+        );
     }
 
-    if(currentBlock.landed){
+    if (currentBlock.landed) {
         placedBlocks.push(currentBlock);
         score += 10;
 
-        if(score % 100 === 0){
+        if (score % 100 === 0) {
             level++;
             speed += 0.4;
             createWall();
@@ -403,7 +406,7 @@ function update(){
         assignControlledBlock();
     }
 
-    if(flashTimer > 0){
+    if (flashTimer > 0) {
         ctx.fillStyle = "rgba(255,0,0,0.25)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         flashTimer -= 1;
@@ -412,13 +415,12 @@ function update(){
     requestAnimationFrame(update);
 }
 
-window.addEventListener("keydown", e => {
+window.addEventListener("keydown", (e) => {
+    if (e.repeat) return;
 
-    if(e.repeat) return;
-
-    if(e.key === "ArrowLeft"){
+    if (e.key === "ArrowLeft") {
         e.preventDefault();
-        if(currentBlock && !currentBlock.landed){
+        if (currentBlock && !currentBlock.landed) {
             currentBlock.vx = -6;
             currentBlock.controlled = false;
             const launched = currentBlock;
@@ -427,9 +429,9 @@ window.addEventListener("keydown", e => {
         }
     }
 
-    if(e.key === "ArrowRight"){
+    if (e.key === "ArrowRight") {
         e.preventDefault();
-        if(currentBlock && !currentBlock.landed){
+        if (currentBlock && !currentBlock.landed) {
             currentBlock.vx = 6;
             currentBlock.controlled = false;
             const launched = currentBlock;
@@ -438,16 +440,15 @@ window.addEventListener("keydown", e => {
         }
     }
 
-    if(e.key === "ArrowDown"){
+    if (e.key === "ArrowDown") {
         e.preventDefault();
-        if(currentBlock && !currentBlock.landed){
+        if (currentBlock && !currentBlock.landed) {
             currentBlock.vy = speed * 2;
         }
     }
 });
 
 window.addEventListener("resize", () => {
-
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
@@ -456,3 +457,15 @@ window.addEventListener("resize", () => {
 
 updateUI();
 update();
+
+const themeToggle = document.getElementById("themeToggle");
+const stored = localStorage.getItem("tapblock-theme");
+if (stored === "light") {
+    document.body.classList.add("light-mode");
+    themeToggle.textContent = "\u263e";
+}
+themeToggle.addEventListener("click", () => {
+    const isLight = document.body.classList.toggle("light-mode");
+    themeToggle.textContent = isLight ? "\u263e" : "\u2600";
+    localStorage.setItem("tapblock-theme", isLight ? "light" : "dark");
+});
