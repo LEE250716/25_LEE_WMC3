@@ -19,6 +19,11 @@ body {
   color: #222;
   font-size: 1.5rem;
 }
+
+p {
+  margin-left: 1rem;
+}
+
 header {
   background: #252f3f;
   color: white;
@@ -41,6 +46,8 @@ header p {
   margin: 0;
   color: #c8d1e0;
 }
+
+/* NAVIGATION */
 .nav-left,
 .nav-right {
   display: flex;
@@ -91,6 +98,10 @@ header p {
     justify-content: center;
   }
 }
+
+/* ============================================================================
+   Matrify-Spezifische Styles
+   ============================================================================ */
 .container {
   max-width: 80rem;
   margin: 1.5rem auto;
