@@ -107,8 +107,7 @@ function renderMatrices() {
     const footer = document.createElement('footer');
 
     const selectTarget = document.createElement('select');
-    selectTarget.innerHTML = `<option value="">Andere Matrix wählen...</option>` + matrices
-      .filter((m) => m.id !== item.id)
+    selectTarget.innerHTML = `<option value="">Eine Matrix wählen (für Addition | Multiplikation)</option>` + matrices
       .map((m) => `<option value="${m.id}">${m.name} (Matrix ${m.id})</option>`)
       .join('');
     footer.appendChild(selectTarget);
@@ -149,7 +148,7 @@ function renderMatrices() {
     multiplyBtn.onclick = () => {
       const targetId = Number(selectTarget.value);
       if (!targetId) {
-        showStatus('Bitte eine zweite Matrix für Multiplikation wählen.', true);
+        showStatus('Bitte eine Matrix für Multiplikation wählen.', true);
         return;
       }
       const target = matrices.find((m) => m.id === targetId);
