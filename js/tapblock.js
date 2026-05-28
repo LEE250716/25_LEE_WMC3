@@ -33,6 +33,7 @@ let flashTimer = 0;
 let spawnTimer = 0;
 const activeBlocks = [];
 let frame = 0;
+let gameRunning = true;
 
 function getLevelColorCount() {
     return Math.min(2 + (level - 1), COLORS.length);
@@ -343,10 +344,33 @@ function flashScreen() {
 }
 
 function gameOver() {
-    console.log("Game Over");
+    gameRunning = false;
+    document.getElementById("finalScore").textContent = score;
+    document.getElementById("gameOverDialog").showModal();
+}
+
+function restartGame() {
+    level = 1;
+    score = 0;
+    lives = 3;
+    speed = 2;
+    flashTimer = 0;
+    spawnTimer = 0;
+    activeBlocks.length = 0;
+    placedBlocks.length = 0;
+    frame = 0;
+
+    createWall();
+    currentBlock = new Block(canvas.width / 2 - GRID / 2, -GRID, true);
+    gameRunning = true;
+    updateUI();
+
+    document.getElementById("gameOverDialog").close();
+    requestAnimationFrame(update);
 }
 
 function update() {
+    if (!gameRunning) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     drawWalls();
@@ -416,7 +440,7 @@ function update() {
 }
 
 window.addEventListener("keydown", (e) => {
-    if (e.repeat) return;
+    if (!gameRunning || e.repeat) return;
 
     if (e.key === "ArrowLeft") {
         e.preventDefault();
@@ -469,3 +493,5 @@ themeToggle.addEventListener("click", () => {
     themeToggle.textContent = isLight ? "\u263e" : "\u2600";
     localStorage.setItem("tapblock-theme", isLight ? "light" : "dark");
 });
+
+document.getElementById("restartBtn").addEventListener("click", restartGame);
