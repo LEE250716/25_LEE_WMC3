@@ -36,15 +36,15 @@ canvas {
 
 .ui {
     position: absolute;
-    top: 15px;
-    left: 15px;
+    top: 12rem;
+    left: 2rem;
     z-index: 10;
-    font-size: 20px;
+    font-size: 1.25rem;
     line-height: 1.5;
     background: var(--ui-bg);
-    padding: 14px 18px;
-    border-radius: 14px;
-    box-shadow: 0 12px 24px var(--ui-shadow);
+    padding: 2rem;
+    border-radius: 2rem;
+    box-shadow: 0 1rem 2rem var(--ui-shadow);
 }
 
 .controls {
