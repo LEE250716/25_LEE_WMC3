@@ -36,13 +36,46 @@ function parseCsv(content, fileName) {
   return matrix;
 }
 
+function saveToLocalStorage() {
+  localStorage.setItem('matrify_matrices', JSON.stringify(matrices));
+  localStorage.setItem('matrify_nextId', nextMatrixId);
+}
+
+function loadFromLocalStorage() {
+  const storedMatrices = localStorage.getItem('matrify_matrices');
+  const storedNextId = localStorage.getItem('matrify_nextId');
+  
+  if (storedMatrices) {
+    try {
+      const parsed = JSON.parse(storedMatrices);
+      const restored = parsed.map(item => ({
+        ...item,
+        matrix: item.matrix.map(row => row.map(val => val === null ? Number.POSITIVE_INFINITY : val))
+      }));
+      
+      matrices.push(...restored);
+      if (storedNextId) {
+        nextMatrixId = Number(storedNextId);
+      }
+      appendOutput("Gespeicherte Matrizen erfolgreich aus dem Browser-Speicher geladen.");
+    } catch (e) {
+      showStatus("Fehler beim Laden aus dem LocalStorage.", true);
+    }
+  }
+}
+
 function addMatrix(name, matrix) {
+  let targetId = 1;
+  while (matrices.some(m => m.id === targetId)) {
+    targetId++;
+  }
   const matrixItem = {
-    id: nextMatrixId++,
+    id: targetId,
     name,
     matrix
   };
   matrices.push(matrixItem);
+  saveToLocalStorage();
   renderMatrices();
   return matrixItem;
 }
@@ -51,6 +84,7 @@ function deleteMatrix(id) {
   const index = matrices.findIndex((item) => item.id === id);
   if (index >= 0) {
     matrices.splice(index, 1);
+    saveToLocalStorage();
     renderMatrices();
     appendOutput(`Matrix ${id} wurde entfernt.`);
   }
@@ -429,4 +463,5 @@ loadButton.addEventListener('click', () => {
   });
 });
 
+loadFromLocalStorage();
 renderMatrices();

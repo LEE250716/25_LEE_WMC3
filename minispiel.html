@@ -27,10 +27,75 @@
       </nav>
     </div>
 
-    <p> <div class="text-center">Graphisches Interface für CSV-Matrizen und Matrix-Methoden.</div></p>
+    <div class="text-center">Graphisches Interface für CSV-Matrizen und Matrix-Methoden.</div>
   </header>
 
-    <p> TBD </p>
+    <div class="container">
+    <div class="game-layout">
+      
+      <!-- Tic-Tac-Toe -->
+      <section class="panel">
+        <h2>1) Tic-Tac-Toe zu Graph</h2>
+        <p>Spiele gegen den Computer. Nach Spielende wird der Spielverlauf als Adjazenzmatrix dargestellt.</p>
+        <div id="tttStatus" class="bold text-center" style="color: #1f6feb;">Du bist dran (X)</div>
+        
+        <div class="ttt-board" id="tttBoard">
+          <div class="ttt-cell" data-index="0"></div>
+          <div class="ttt-cell" data-index="1"></div>
+          <div class="ttt-cell" data-index="2"></div>
+          <div class="ttt-cell" data-index="3"></div>
+          <div class="ttt-cell" data-index="4"></div>
+          <div class="ttt-cell" data-index="5"></div>
+          <div class="ttt-cell" data-index="6"></div>
+          <div class="ttt-cell" data-index="7"></div>
+          <div class="ttt-cell" data-index="8"></div>
+        </div>
+        <button id="resetTttBtn" style="width:100%; padding:0.5rem; margin-bottom:1rem; border-radius:0.5rem; border:1px solid #cbd5e0; background:#f8fafc; cursor:pointer;">Spiel zurücksetzen</button>
+
+        <div id="tttMatrixArea" style="display: none; border-top: 1px solid #e2e8f0; padding-top: 1rem;">
+          <h3>Resultierende Adjazenzmatrix:</h3>
+          <p class="hint">Knoten 0-8 repräsentieren die Felder. Kante existiert, wenn aufeinanderfolgende Züge gemacht wurden.</p>
+        <div id="tttMatrixView" class="matrix-card" style="padding:1rem; margin-bottom:1rem;"></div>
+          
+        <div id="tttMatrixContainer">
+            <button id="saveTttMatrixBtn" style="width:100%; background:#0078d4; color:white; border:none; padding:0.75rem; border-radius:0.5rem; cursor:pointer;">Auf Matrify-Seite speichern</button>
+        </div>
+        </div>
+      </section>
+
+      <!-- Graphenzeichner -->
+      <section class="panel">
+        <h2>2) Graphenzeichner</h2>
+        <p>Wähle ein Werkzeug aus, um den Graphen interaktiv zu bearbeiten.</p>
+  
+        <!-- NEU: WERKZEUG-LEISTE -->
+        <div style="display: flex; gap: 1rem; margin-bottom: 0.75rem; font-size: 0.9rem; background: #eceff5; padding: 0.5rem 1rem; border-radius: 0.5rem;">
+          <span class="bold">Werkzeug:</span>
+          <label style="cursor:pointer;"><input type="radio" name="graphTool" value="node" checked> 🔵 Knoten zeichnen</label>
+          <label style="cursor:pointer;"><input type="radio" name="graphTool" value="edge"> ➖ Kante ziehen</label>
+          <label style="cursor:pointer;"><input type="radio" name="graphTool" value="delete"> ❌ Element löschen</label>
+        </div>
+  
+        <div class="canvas-container">
+          <canvas id="graphCanvas" width="500" height="300"></canvas>
+        </div>
+        
+        <div style="display:flex; gap:0.5rem; margin-bottom:1rem;">
+          <button id="clearGraphBtn" style="flex:1; padding:0.5rem; border-radius:0.5rem; border:1px solid #cbd5e0; background:#f43f5e; color:white; cursor:pointer;">Alles löschen</button>
+          <button id="generateGraphMatrixBtn" style="flex:1; padding:0.5rem; border-radius:0.5rem; border:1px solid #cbd5e0; background:#1f6feb; color:white; cursor:pointer;">Als Matrix ausgeben</button>
+        </div>
+
+        <div id="graphMatrixArea" style="display: none; border-top: 1px solid #e2e8f0; padding-top: 1rem;">
+          <h3>Generierte Matrix:</h3>
+          <div id="graphMatrixView" class="matrix-card" style="padding:1rem; margin-bottom:1rem;"></div>
+          <button id="saveGraphMatrixBtn" style="width:100%; background:#0078d4; color:white; border:none; padding:0.75rem; border-radius:0.5rem; cursor:pointer;">Auf Matrify-Seite speichern</button>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="js/minispiel.js"></script>
         
 </body>
 

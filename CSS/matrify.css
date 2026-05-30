@@ -236,3 +236,99 @@ header p {
   font-size: 0.875rem;
   margin-top: 0.75rem;
 }
+
+
+/* ============================================================================
+   Minigame Styles
+   ============================================================================ */
+    .game-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .ttt-board {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+      max-width: 300px;
+      margin: 1rem auto;
+    }
+    .ttt-cell {
+      aspect-ratio: 1;
+      background: #f8fafc;
+      border: 2px solid #cbd5e0;
+      border-radius: 0.5rem;
+      font-size: 2rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .canvas-container {
+      position: relative;
+      width: 100%;
+      background: #f8fafc;
+      border: 2px dashed #cbd5e0;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 300px;
+      cursor: crosshair;
+    }
+    @media (max-width: 48rem) {
+      .game-layout { grid-template-columns: 1fr; }
+    }
+
+
+    /* ============================================================================
+   YouTube Video-Reihen Styles (3-zeiliges Layout)
+   ============================================================================ */
+.video-section-title {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  color: #252f3f;
+  border-bottom: 2px solid #eceff5;
+  padding-bottom: 0.5rem;
+}
+.video-row-layout {
+  display: grid;
+  grid-template-columns: 24rem 1fr; /* Festgelegte Videobreite links, Text füllt den Rest */
+  gap: 1.5rem;
+  align-items: start;
+}
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 Format */
+  height: 0;
+  overflow: hidden;
+  border: 1px solid #d8e2ef;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.video-info h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.3rem;
+  color: #1f6feb;
+}
+.video-info p {
+  margin: 0;
+}
+
+/* Smartphone-Ansicht: Text rutscht unter das Video */
+@media (max-width: 48rem) {
+  .video-row-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
